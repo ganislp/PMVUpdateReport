@@ -1,0 +1,49 @@
+<div class="flex-p">
+  <mat-card>
+    <mat-card-header class="text-cente">
+      <mat-card-title>
+        <h2>Deal Assessment</h2>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <p>Please select a deal, assessment year and quarter to start the assessment</p>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="flex-row-container p-20">
+        <label class="label-height">Select:</label>
+        <mat-form-field>
+          <mat-select placeholder="Deal Name" [(value)]="selectedDealId">
+            <mat-option *ngFor="let deal of deals" [value]="deal.id">
+              {{deal.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Assessment Year" [(value)]="selectedYear">
+            <mat-option *ngFor="let year of years" [value]="year">
+              {{year}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Assessment Quarter" [(value)]="selectedQuarter">
+            <mat-option *ngFor="let q of quarters" [value]="q">
+              {{q}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <mat-tab-group *ngIf="(selectedDealId && selectedYear && selectedQuarter)">
+        <mat-tab *ngFor="let subheading of subheadings" [label]="subheading.name">
+          <div fxLayout="column" class="form-field-outer p-20">
+            <mat-form-field *ngFor="let question of subheading.questions" class="w-100 m-b10">
+              <textarea matInput [placeholder]="question.question" [(ngModel)]="question.answer"></textarea>
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary" class="float-r" (click)="save(subheading)">Save</button>
+        </mat-tab>
+      </mat-tab-group>
+      <!-- <button mat-raised-button color="primary">Submit</button> -->
+    </mat-card-content>
+  </mat-card>
+</div>

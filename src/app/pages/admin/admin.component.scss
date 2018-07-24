@@ -1,0 +1,39 @@
+.add-item-action{
+    display: inline;
+    // float: left;
+    padding: 20px
+}
+
+.d-flex{
+    display: flex;
+}
+
+.table{
+    padding:20px;
+}
+
+.add-item {
+    padding: 10px 0px;
+    button {
+        float: right;
+    }
+}
+
+/* mat-card-header{
+    justify-content: center;
+} */
+
+mat-table{
+    &.wide-table{
+        @media (min-width: 1200px) { 
+            min-width: 768px ;
+        }
+            
+    }
+    .selectable-row{
+        cursor: pointer;
+    }
+    .customWidthClass{
+        flex: 0 0 70%;
+     }
+  }

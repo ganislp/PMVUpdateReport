@@ -1,0 +1,141 @@
+<div class="flex-p">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <h2>Manage Data</h2>
+            </mat-card-title>
+            <mat-card-subtitle>
+                <p> Please select a heading and subheading to view the relavant questions</p>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="flex-row-container">
+                <div class="table">
+                    <h3>Headings</h3>
+                    <div class="add-item">
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                        </mat-form-field>
+                        <button mat-raised-button color="primary" (click)="openAddEditItemDialog(0, null)">
+                            <mat-icon>add</mat-icon>Add</button>
+                    </div>
+
+                    <div class="mat-elevation-z8">
+                        <mat-table #table [dataSource]="headingsDataSource" matSort>
+
+                            <!-- ID Column -->
+                            <ng-container matColumnDef="headingId">
+                                <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.headingId}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="heading">
+                                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.heading}} </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;" class="selectable-row" [ngClass]="{'bg-primary': selectedHeadingId == row.headingId}"
+                                (click)="highlight('headings', row)"></mat-row>
+                        </mat-table>
+
+                        <mat-paginator #headingsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                    </div>
+                </div>
+                <div class="table">
+                    <h3>Sub Headings</h3>
+                    <div class="add-item">
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                        </mat-form-field>
+                        <button mat-raised-button color="primary" (click)="openAddEditItemDialog(1, null)">
+                            <mat-icon>add</mat-icon>Add</button>
+                    </div>
+
+                    <div class="mat-elevation-z8">
+                        <mat-table #table [dataSource]="headingsDataSource" matSort>
+
+                            <!-- ID Column -->
+                            <ng-container matColumnDef="headingId">
+                                <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.headingId}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="heading">
+                                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.heading}} </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;" class="selectable-row" [ngClass]="{'bg-primary': selectedSubHeadingId == row.headingId}"
+                                (click)="highlight('subheadings', row)"></mat-row>
+                        </mat-table>
+
+                        <mat-paginator #subheadingsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Questions</h3>
+
+                    <!--  <p *ngIf="selectedHeadingId < 0 && selectedSubHeadingId < 0">
+                        <ngb-alert type="info" [dismissible]="false">
+                            Please select a heading and subheading to view the relavant questions
+                        </ngb-alert>
+                    </p> -->
+
+                    <div class="add-item">
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                        </mat-form-field>
+                        <button mat-raised-button color="primary" (click)="openAddEditItemDialog(2, null)">
+                            <mat-icon>add</mat-icon>Add</button>
+                    </div>
+
+                    <div class="mat-elevation-z8">
+                        <mat-table class="wide-table" #table [dataSource]="questionsDataSource" matSort>
+
+                            <!-- ID Column -->
+                            <ng-container matColumnDef="id">
+                                <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Question Column -->
+                            <ng-container matColumnDef="question">
+                                <mat-header-cell *matHeaderCellDef [ngClass]="'customWidthClass'"> Question </mat-header-cell>
+                                <mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'"> {{element.question}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="edit">
+                                <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                    <mat-icon class="selectable-row" (click)="openAddEditItemDialog(2, element)">edit</mat-icon>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="delete">
+                                <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                    <mat-icon class="selectable-row" (click)="deleteQuestion(element)">delete</mat-icon>
+                                </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumnsQuestions"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumnsQuestions;" (click)="selectedquestionId = row.id"></mat-row>
+                        </mat-table>
+
+                        <mat-paginator #questionsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                    </div>
+
+                </div>
+            </div>
+            <div class="add-item-action">
+                <mat-icon></mat-icon>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<mat-spinner *ngIf="showSpinner">Loading questions</mat-spinner>
