@@ -10,6 +10,7 @@ import {AdminManagedService} from "../../theme/services/admin-managedata.service
 import {PmvHeading} from "../../theme/models/pmv-heading.model";
 import {PmvSubHeading} from "../../theme/models/pmv-subheading.model";
 import {PmvQuestion} from "../../theme/models/pmv-question.model";
+import {Response} from "../../theme/models/response.model";
 
 
 
@@ -152,6 +153,53 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  public updateQuestion(pmvQuestion:PmvQuestion){
+    this.adminManagedService.updatePmvQuestion(pmvQuestion).subscribe(
+        updateUserResponse => {
+         // this.getUsers()
+          //this.notificationsService.notify('info', '', updateUserResponse.message);
+        },
+        (errorResponse: Response) => {
+          console.log(errorResponse);
+          //this.notificationsService.notify('error', '', errorResponse.error.toString());
+
+        });
+
+
+  }
+
+  public updatePmvHeading(pmvHeading:PmvHeading){
+    this.adminManagedService.updatePmvHeading(pmvHeading).subscribe(
+        updateUserResponse => {
+          // this.getUsers()
+          //this.notificationsService.notify('info', '', updateUserResponse.message);
+        },
+        (errorResponse: Response) => {
+          console.log(errorResponse);
+          //this.notificationsService.notify('error', '', errorResponse.error.toString());
+
+        });
+
+
+  }
+
+  public updateSubPmvHeading(pmvSubHeading:PmvSubHeading){
+    this.adminManagedService.updatePmvSubHeading(pmvSubHeading).subscribe(
+        updateUserResponse => {
+          // this.getUsers()
+          //this.notificationsService.notify('info', '', updateUserResponse.message);
+        },
+        (errorResponse: Response) => {
+          console.log(errorResponse);
+          //this.notificationsService.notify('error', '', errorResponse.error.toString());
+
+        });
+
+
+  }
+
+
+
   ngOnInit() {
     this.showSpinner = true;
     this.getPmvHeadings();
@@ -182,12 +230,21 @@ export class AdminComponent implements OnInit {
       data: { itemType: itemType, item: item }
 
     });
-    let body = JSON.stringify(item);
-    console.log(item);
-    dialogRef.afterClosed().subscribe(item => {
-      if (item) {
 
-        (item.id) ? this.updateItem(itemType, item) : this.addItem(itemType, item);
+    dialogRef.afterClosed().subscribe(item => {
+      let body = JSON.stringify(item);
+      console.log("update is calling" + body)
+      if (itemType == ItemTypes.questions) {
+
+        (item.questionId) ? this.updateItem(itemType, item) : this.addItem(itemType, item);
+      }
+
+      else if (itemType == ItemTypes.headings) {
+        (item.headingId) ? this.updateItem(itemType, item) : this.addItem(itemType, item);
+      }
+
+      else if (itemType == ItemTypes.subheadings) {
+        (item.subheadingId) ? this.updateItem(itemType, item) : this.addItem(itemType, item);
       }
     });
 
@@ -197,22 +254,30 @@ export class AdminComponent implements OnInit {
 
 
 
-  private updateItem(itemType: ItemTypes, item: Item | Question) {
-    /*  let index: number;
+  private updateItem(itemType: ItemTypes, item: Item | PmvQuestion | PmvHeading | PmvSubHeading) {
+      let index: number;
+
      if (itemType == ItemTypes.questions) {
-       index = this.questions.findIndex(el => el.id == item.id);
-       this.questions.splice(index, 0, item);
-     } else if (itemType == ItemTypes.headings) {
-       if (!this.headings) this.headings = [];
-       this.headings.push(item);
-     } else {
-       if (!this.subheadings) this.subheadings = [];
-       this.subheadings.push(item);
-     } */
+       this.updateQuestion(<PmvQuestion>item);
+       /*index = this.pmvQuestions.findIndex(el => el.questionId == item.id);
+       this.pmvQuestions.splice(index, 0, item);*/
+     }
+     else if (itemType == ItemTypes.headings) {
+       console.log("update is calling")
+       this.updatePmvHeading(<PmvHeading>item);
+     }
 
-    // new this.findAndReplaceInArray(itemType == ItemTypes.questions ? this.questions : (itemType == ItemTypes.headings
-     // ? this.headings : this.subheadings), item);
+     else if (itemType == ItemTypes.subheadings) {
+       this.updateSubPmvHeading(<PmvSubHeading>item);
+     }
 
+    /* else {
+       if (!this.pmvSubHeadings) this.pmvSubHeadings = [];
+       this.pmvSubHeadings.push(item | PmvSubHeading);
+     }*/
+
+   //new this.findAndReplaceInArray(itemType == ItemTypes.questions ? this.questions : (itemType == ItemTypes.headings
+   // ? this.headings : this.subheadings), item);
   }
 
   private findAndReplaceInArray(arr: any[], item: Item | Question) {

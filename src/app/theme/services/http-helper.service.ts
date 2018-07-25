@@ -32,6 +32,23 @@ export class HttpHelperService {
     });
   }
 
+ putDataWithoutAuthentication = <T>(serviceUrl: string, data: any): Observable<T> => {
+    return Observable.create((observer: Observer<T>) => {
+      const url = environment.webServiceUrl + serviceUrl;
+      this.http.put<T>(url, data).subscribe(
+          (responseData) => {
+            console.log(responseData);
+            observer.next(responseData);
+            observer.complete();
+          },
+          (error: HttpErrorResponse) => {
+            console.log(error);
+            observer.error(error);
+          }
+      );
+    });
+  }
+
 
 
 /*  getData = <T>(service: string): Observable<T> => {

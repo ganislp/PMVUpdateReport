@@ -31,9 +31,6 @@ export class AddItemComponent implements OnInit {
       this.itemType = this.data.itemType;
       this.item = this.data.item;
       let initialValue: string;
-      let body = JSON.stringify(this.item);
-      console.log(this.item);
-
       if (this.itemType == ItemTypes.questions) {
         initialValue = (<PmvQuestion>this.item) ? (<PmvQuestion>this.item).question : null;
         this.form.addControl("question", new FormControl(initialValue, Validators.compose([Validators.required, Validators.minLength(10)])));
@@ -85,12 +82,17 @@ export class AddItemComponent implements OnInit {
   }
 
   save(): void {
-    if (!this.item) this.item = {} as Item | PmvQuestion;
+    if (!this.item) this.item = {} as Item | PmvQuestion |PmvHeading | PmvSubHeading;
 
     if (this.itemType == ItemTypes.questions) {
       (<PmvQuestion>this.item).question = this.form.value ? this.form.value['question'] : '';
-    } else {
-      (<Item>this.item).name = this.form.value ? this.form.value['name'] : '';
+    }
+    else if(this.itemType == ItemTypes.headings){
+      (<PmvHeading>this.item).heading = this.form.value ? this.form.value['heading'] : '';
+
+    }
+    else if(this.itemType == ItemTypes.subheadings){
+      (<PmvSubHeading>this.item).subHeading = this.form.value ? this.form.value['subHeading'] : '';
     }
     this.dialogRef.close(this.item);
   }
