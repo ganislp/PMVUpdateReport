@@ -30,7 +30,7 @@ export class Deal {
 }
 
 export enum ItemTypes {
-    headings = 0,
-    subheadings,
-    questions
+    headings = 1,
+    subheadings = 2,
+    questions = 3
 }

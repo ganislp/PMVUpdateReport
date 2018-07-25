@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {PmvHeading} from "../models/pmv-heading.model";
 import {PmvSubHeading} from "../models/pmv-subheading.model";
+import {PmvQuestion} from "../models/pmv-question.model";
 
 
 
@@ -21,6 +22,10 @@ export class AdminManagedService{
 
     getPmvSubHeadingsByHeadingId = (headingId:number): Observable<PmvSubHeading[]> => {
         return this.httpHelper.getDataWithoutAuthentication<PmvSubHeading[]>('getPmvSubHeadings'+ "?"+"headingId="+headingId);
+    }
+
+    getQuestionsByHeadingIdAndSubHeadingId = (headingId:number,subHeadingId:number): Observable<PmvQuestion[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<PmvQuestion[]>('getQuestions'+ "?"+"headingId="+headingId+ "&"+"subheadingId="+subHeadingId);
     }
 
 

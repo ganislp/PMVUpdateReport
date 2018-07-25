@@ -16,7 +16,7 @@
                         <mat-form-field>
                             <input matInput (keyup)="applyFilterHeadings($event.target.value)" placeholder="Filter">
                         </mat-form-field>
-                        <button mat-raised-button color="primary" (click)="openAddEditItemDialog(0, null)">
+                        <button mat-raised-button color="primary" (click)="openAddEditItemDialog(1, null)">
                             <mat-icon>add</mat-icon>Add</button>
                     </div>
 
@@ -25,7 +25,7 @@
 
                             <!-- ID Column -->
                             <ng-container matColumnDef="headingId">
-                                <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef > ID. </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.headingId}} </mat-cell>
                             </ng-container>
 
@@ -34,22 +34,43 @@
                                 <mat-header-cell *matHeaderCellDef> Heading </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.heading}} </mat-cell>
                             </ng-container>
+                            <ng-container matColumnDef="edit">
+                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                <mat-cell *matCellDef="let group" (click)="$event.stopPropagation()">
+                                    <button mat-button (click)="openAddEditItemDialog(1, group)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </mat-cell>
+
+                            </ng-container>
+
+                            <ng-container matColumnDef="delete">
+                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                <mat-cell *matCellDef="let group" (click)="$event.stopPropagation()">
+                                    <button mat-button (click)="onDelete(group.id)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </mat-cell>
+
+                            </ng-container>
+
 
                             <mat-header-row *matHeaderRowDef="pmvHeadingDisplayedColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: pmvHeadingDisplayedColumns;" class="selectable-row" [ngClass]="{'bg-primary': selectedHeadingId == row.headingId}"
-                                (click)="highlight('headings', row)"></mat-row>
+                                (click)="highlightSubHeadings('pmvHeadings', row)"></mat-row>
                         </mat-table>
 
-                        <mat-paginator #headingsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                        <mat-paginator #pmvHeadingsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
                     </div>
                 </div>
+
                 <div class="table" *ngIf="this.selectedHeadingId >= 1">
                     <h3>Sub Headings</h3>
                     <div class="add-item">
                         <mat-form-field>
                             <input matInput (keyup)="applyFilterSubHeadings($event.target.value)" placeholder="Filter">
                         </mat-form-field>
-                        <button mat-raised-button color="primary" (click)="openAddEditItemDialog(1, null)">
+                        <button mat-raised-button color="primary" (click)="openAddEditItemDialog(2, null)">
                             <mat-icon>add</mat-icon>Add</button>
                     </div>
 
@@ -68,39 +89,68 @@
                                 <mat-cell *matCellDef="let element"> {{element.subHeading}} </mat-cell>
                             </ng-container>
 
+                            <ng-container matColumnDef="heading">
+                                <mat-header-cell *matHeaderCellDef> Heading </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.heading}} </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="edit">
+                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                <mat-cell *matCellDef="let group" (click)="$event.stopPropagation()">
+                                    <button mat-button (click)="openAddEditItemDialog(2, group)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </mat-cell>
+
+                            </ng-container>
+
+                            <ng-container matColumnDef="delete">
+                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                <mat-cell *matCellDef="let group" (click)="$event.stopPropagation()">
+                                    <button mat-button (click)="onDelete(group.id)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </mat-cell>
+
+                            </ng-container>
+
+
+
+
+
+
                             <mat-header-row *matHeaderRowDef="pmvSubHeadingDisplayedColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: pmvSubHeadingDisplayedColumns;" class="selectable-row" [ngClass]="{'bg-primary': selectedSubHeadingId == row.subHeadingId}"
-                                (click)="highlight('subheadings', row)"></mat-row>
+                                (click)="highlightQuestions('pmvSubheadings', row)"></mat-row>
                         </mat-table>
 
-                        <mat-paginator #subheadingsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                        <mat-paginator #pmvSubheadingsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
                     </div>
                 </div>
 
                 <div>
-                    <h3>Questions</h3>
+                    <h3 *ngIf="this.selectedHeadingId >= 7 && this.selectedSubHeadingId >= 7">Questions</h3>
 
                     <!--  <p *ngIf="selectedHeadingId < 0 && selectedSubHeadingId < 0">
                         <ngb-alert type="info" [dismissible]="false">
                             Please select a heading and subheading to view the relavant questions
                         </ngb-alert>
                     </p> -->
+                    <!-- please not valide quitions from -->
+                                        <div class="add-item" *ngIf="this.selectedHeadingId >= 7 && this.selectedSubHeadingId >= 7">
+                                            <mat-form-field>
+                                                <input matInput (keyup)="applyFilterQuestions($event.target.value)" placeholder="Filter">
+                                            </mat-form-field>
+                                            <button mat-raised-button color="primary" (click)="openAddEditItemDialog(3, null)">
+                                                <mat-icon>add</mat-icon>Add</button>
+                                        </div>
 
-                    <div class="add-item">
-                        <mat-form-field>
-                            <input matInput (keyup)="applyFilterSubHeadings($event.target.value)" placeholder="Filter">
-                        </mat-form-field>
-                        <button mat-raised-button color="primary" (click)="openAddEditItemDialog(2, null)">
-                            <mat-icon>add</mat-icon>Add</button>
-                    </div>
+                                        <div class="mat-elevation-z8" *ngIf="this.selectedHeadingId >= 7 && this.selectedSubHeadingId >= 7">
+                                            <mat-table class="wide-table" #table [dataSource]="pmvQuestionsDataSource" matSort>
 
-                    <div class="mat-elevation-z8">
-                        <mat-table class="wide-table" #table [dataSource]="questionsDataSource" matSort>
-
-                            <!-- ID Column -->
-                            <ng-container matColumnDef="id">
+                                                <!-- ID Column -->
+                            <ng-container matColumnDef="questionId">
                                 <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                                <mat-cell *matCellDef="let element"> {{element.questionId}} </mat-cell>
                             </ng-container>
 
                             <!-- Question Column -->
@@ -112,7 +162,7 @@
                             <ng-container matColumnDef="edit">
                                 <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
-                                    <mat-icon class="selectable-row" (click)="openAddEditItemDialog(2, element)">edit</mat-icon>
+                                    <mat-icon class="selectable-row" (click)="openAddEditItemDialog(3, element)">edit</mat-icon>
                                 </mat-cell>
                             </ng-container>
 
@@ -124,10 +174,10 @@
                             </ng-container>
 
                             <mat-header-row *matHeaderRowDef="displayedColumnsQuestions"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: displayedColumnsQuestions;" (click)="selectedquestionId = row.id"></mat-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumnsQuestions;" (click)="selectedquestionId = row.questionId"></mat-row>
                         </mat-table>
 
-                        <mat-paginator #questionsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                        <mat-paginator #pmvQuestionsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
                     </div>
 
                 </div>

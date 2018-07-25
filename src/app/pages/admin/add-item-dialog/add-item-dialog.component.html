@@ -1,22 +1,47 @@
 <h1 mat-dialog-title>
-    <span *ngIf="!item?.id">Add</span>
-    <span *ngIf="item?.id">Edit</span> Item</h1>
+    <div [ngSwitch]="itemType">
+        <div *ngSwitchCase="1">
+            <span *ngIf="!item?.headingId ">Add Heading</span>
+            <span *ngIf="item?.headingId">Edit Heading</span>
+        </div>
+        <div *ngSwitchCase="2">
+            <span *ngIf="!item?.subHeadingId ">Add SubHeading</span>
+            <span *ngIf="item?.subHeadingId">Edit SubHeading</span>
+        </div>
+        <div *ngSwitchCase="3">
+            <span *ngIf="!item?.questionId ">Add Question</span>
+            <span *ngIf="item?.questionId">Edit Question</span>
+        </div>
+    </div>
+
+
+
+
+</h1>
 <div mat-dialog-content>
     <form [formGroup]="form" class="user-form">
         <!-- <mat-tab-group class="vertical-tabs">
             <mat-tab label="Basic"> -->
                 <div fxLayout="column" class="form-field-outer">
-                    <mat-form-field class="w-100" *ngIf="itemType <= 1">
-                        <mat-placeholder>Enter the name</mat-placeholder>
-                        <input matInput formControlName="name">
-                        <mat-error *ngIf="form.controls['name'].errors?.required">Name is required</mat-error>
-                        <mat-error *ngIf="form.controls['name'].hasError('minlength')">Name isn't long enough, minimum of 6 characters</mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="w-100" *ngIf="itemType == 2">
+                          <mat-form-field class="w-100" *ngIf="itemType == 3">
                         <mat-placeholder>Enter the question</mat-placeholder>
                         <textarea matInput formControlName="question"></textarea>
                         <mat-error *ngIf="form.controls['question']?.errors?.required">Question is required</mat-error>
                         <mat-error *ngIf="form.controls['question']?.hasError('minlength')">Question isn't long enough, minimum of 6 characters</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100" *ngIf="itemType == 1">
+                        <mat-placeholder>Enter the heading</mat-placeholder>
+                        <input matInput formControlName="heading">
+                        <mat-error *ngIf="form.controls['heading'].errors?.required">Heading is required</mat-error>
+                        <mat-error *ngIf="form.controls['heading'].hasError('minlength')">Heading isn't long enough, minimum of 6 characters</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100" *ngIf="itemType == 2">
+                        <mat-placeholder>Enter the subHeading</mat-placeholder>
+                        <input matInput formControlName="subHeading">
+                        <mat-error *ngIf="form.controls['subHeading'].errors?.required">SubHeading is required</mat-error>
+                        <mat-error *ngIf="form.controls['subHeading'].hasError('minlength')">SubHeading isn't long enough, minimum of 6 characters</mat-error>
                     </mat-form-field>
                 </div>
             <!-- </mat-tab>
@@ -25,8 +50,24 @@
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
     <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="save()">
-        <span *ngIf="!item?.id">Save</span>
-        <span *ngIf="item?.id">Update</span>
+
+
+
+        <div [ngSwitch]="itemType">
+            <div *ngSwitchCase="1">
+                <span *ngIf="!item?.headingId ">Save</span>
+                <span *ngIf="item?.headingId">Update</span>
+            </div>
+            <div *ngSwitchCase="2">
+                <span *ngIf="!item?.subHeadingId ">Save</span>
+                <span *ngIf="item?.subHeadingId">Update</span>
+            </div>
+            <div *ngSwitchCase="3">
+                <span *ngIf="!item?.questionId ">Save</span>
+                <span *ngIf="item?.questionId">Update</span>
+            </div>
+        </div>
+
     </button>
     <button mat-raised-button color="warn" (click)="close()">Cancel</button>
 </div>

@@ -9,6 +9,8 @@ import { Item, Question, ItemTypes } from './add-item-dialog/item.model';
 import {AdminManagedService} from "../../theme/services/admin-managedata.service";
 import {PmvHeading} from "../../theme/models/pmv-heading.model";
 import {PmvSubHeading} from "../../theme/models/pmv-subheading.model";
+import {PmvQuestion} from "../../theme/models/pmv-question.model";
+
 
 
 
@@ -23,27 +25,28 @@ export class AdminComponent implements OnInit {
   selectedHeading: string;
   selectedSubHeading: string;
   subscriptions = [];
-  questions: Question[];
   showSpinner: boolean;
   selectedHeadingId: number = -1;
   selectedSubHeadingId: number = -1;
   pmvHeadings: PmvHeading[];
   pmvSubHeadings: PmvSubHeading[];
+  pmvQuestions: PmvQuestion[];
 
   //Mat table variables
-  pmvHeadingDisplayedColumns: string[] = ['headingId', 'heading'];
-  pmvSubHeadingDisplayedColumns: string[] = ['subHeadingId', 'subHeading'];
-  displayedColumnsQuestions: string[] = ['id', 'question', 'edit', 'delete'];
+  pmvHeadingDisplayedColumns: string[] = ['headingId', 'heading','edit', 'delete'];
+  pmvSubHeadingDisplayedColumns: string[] = ['subHeadingId', 'subHeading','edit', 'delete'];
+  displayedColumnsQuestions: string[] = ['questionId', 'question', 'edit', 'delete'];
   headingsDataSource: MatTableDataSource<PmvHeading>;
   subHeadingsDataSource: MatTableDataSource<PmvSubHeading>;
-  questionsDataSource: MatTableDataSource<Question>;
+  pmvQuestionsDataSource: MatTableDataSource<PmvQuestion>;
 
-  @ViewChild('headingsPaginator') headingsPaginator: MatPaginator;
-  @ViewChild('headingSort') headingsSort: MatSort;
-  @ViewChild('subheadingsPaginator') subheadingsPaginator: MatPaginator;
-  @ViewChild('subheadingsSort') subheadingsSort: MatSort;
-  @ViewChild('questionsPaginator') questionsPaginator: MatPaginator;
-  @ViewChild('questionsSort') questionsSort: MatSort;
+
+  @ViewChild('pmvHeadingsPaginator') pmvHeadingsPaginator: MatPaginator;
+  @ViewChild('pmvHeadingSort') pmvHeadingsSort: MatSort;
+  @ViewChild('pmvSubheadingsPaginator') pmvSubheadingsPaginator: MatPaginator;
+  @ViewChild('pmvSubheadingsSort') pmvSubheadingsSort: MatSort;
+  @ViewChild('pmvQuestionsPaginator') pmvQuestionsPaginator: MatPaginator;
+  @ViewChild('pmvQuestionsSort') pmvQuestionsSort: MatSort;
 
   constructor(private apiService: ApiService,private adminManagedService :AdminManagedService,
     private dialog: MatDialog,
@@ -57,7 +60,7 @@ export class AdminComponent implements OnInit {
           response = this.pmvHeadings = response;
           this.showSpinner = true;
           this.headingsDataSource = new MatTableDataSource<PmvHeading>(this.pmvHeadings);
-          this.setUpSortingAndPagination("headings");
+          this.setUpSortingAndPagination("pmvHeadings");
         }
         , (error) => {
           this.showSpinner = false;
@@ -73,7 +76,7 @@ export class AdminComponent implements OnInit {
           response = this.pmvSubHeadings = response;
           this.showSpinner = true;
           this.subHeadingsDataSource = new MatTableDataSource<PmvSubHeading>(this.pmvSubHeadings);
-          this.setUpSortingAndPagination("subheadingsSort");
+          this.setUpSortingAndPagination("pmvSubheadingsSort");
         }
         , (error) => {
           this.showSpinner = false;
@@ -83,13 +86,42 @@ export class AdminComponent implements OnInit {
 
   }
 
-  highlight(tableName: string, row: PmvHeading) {
-    if (tableName == "headings") {
+  getQuestionsByHeadingIdAndSubHeadingId = (headingId:number,subheadingId:number): void => {
+    this.adminManagedService.getQuestionsByHeadingIdAndSubHeadingId(this.selectedHeadingId,this.selectedSubHeadingId).subscribe(
+        (response) => {
+          response = this.pmvQuestions = response;
+          this.showSpinner = true;
+          this.pmvQuestionsDataSource = new MatTableDataSource<PmvQuestion>(this.pmvQuestions);
+          this.setUpSortingAndPagination("pmvQuestionsSort");
+        }
+        , (error) => {
+          this.showSpinner = false;
+          console.log(error);
+        }
+    );
+
+  }
+
+
+  highlightSubHeadings(tableName: string, row: PmvHeading) {
+    if (tableName == "pmvHeadings") {
       this.selectedHeadingId = row.headingId;
       console.log("this.selectedHeadingId"+ this.selectedHeadingId)
     }
     if (this.selectedHeadingId >= 0) {
       this.getPmvSubHeadingsByHeadingId(this.selectedHeadingId);
+      this.showSpinner = true;
+
+    }
+  }
+
+  highlightQuestions(tableName: string, row: PmvSubHeading) {
+    if (tableName == "pmvSubheadings") {
+      this.selectedSubHeadingId = row.subHeadingId;
+      console.log("this.selectedSubHeadingId"+ this.selectedSubHeadingId)
+    }
+    if (this.selectedHeadingId > 0 && this.selectedSubHeadingId > 0) {
+      this.getQuestionsByHeadingIdAndSubHeadingId(this.selectedHeadingId,this.selectedSubHeadingId);
       this.showSpinner = true;
 
     }
@@ -103,9 +135,28 @@ export class AdminComponent implements OnInit {
     this.subHeadingsDataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  applyFilterQuestions(filterValue: string) {
+    this.pmvQuestionsDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  private setUpSortingAndPagination(tableName: string) {
+    if (tableName == "pmvHeadings") {
+      this.headingsDataSource.paginator = this.pmvHeadingsPaginator;
+      this.headingsDataSource.sort = this.pmvHeadingsSort;
+    } else if (tableName == "pmvSubheadings") {
+      this.subHeadingsDataSource.paginator = this.pmvSubheadingsPaginator;
+      this.subHeadingsDataSource.sort = this.pmvSubheadingsSort;
+    } else if (tableName == "pmvQuestions") {
+      this.pmvQuestionsDataSource.paginator = this.pmvQuestionsPaginator;
+      this.pmvQuestionsDataSource.sort = this.pmvQuestionsSort;
+    }
+  }
+
   ngOnInit() {
     this.showSpinner = true;
     this.getPmvHeadings();
+
+
     /*this.subscriptions.push(this.adminManagedService.getPmvHeadings().subscribe((response) => {
       this.pmvHeadings = response;
       this.showSpinner = false;
@@ -123,30 +174,28 @@ export class AdminComponent implements OnInit {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  private setUpSortingAndPagination(tableName: string) {
-    if (tableName == "headings") {
-      this.headingsDataSource.paginator = this.headingsPaginator;
-      this.headingsDataSource.sort = this.headingsSort;
-    } else if (tableName == "subheadings") {
-      this.subHeadingsDataSource.paginator = this.subheadingsPaginator;
-      this.subHeadingsDataSource.sort = this.subheadingsSort;
-    } else if (tableName == "questions") {
-      this.questionsDataSource.paginator = this.questionsPaginator;
-      this.questionsDataSource.sort = this.questionsSort;
-    }
-  }
 
-  public openAddEditItemDialog(itemType: ItemTypes, item: Item | Question) {
+
+  public openAddEditItemDialog(itemType: ItemTypes, item: Item | PmvQuestion | PmvHeading | PmvSubHeading) {
+
     let dialogRef = this.dialog.open(AddItemComponent, {
       data: { itemType: itemType, item: item }
-    });
 
+    });
+    let body = JSON.stringify(item);
+    console.log(item);
     dialogRef.afterClosed().subscribe(item => {
       if (item) {
+
         (item.id) ? this.updateItem(itemType, item) : this.addItem(itemType, item);
       }
     });
+
   }
+
+
+
+
 
   private updateItem(itemType: ItemTypes, item: Item | Question) {
     /*  let index: number;
@@ -226,12 +275,12 @@ export class AdminComponent implements OnInit {
     }
   }*/
 
-  deleteQuestion(q: Question): void {
+/*  deleteQuestion(q: Question): void {
     let index = this.questions.findIndex(qes => qes.id == q.id);
     this.questions.splice(index, 1);
     this.setUpSortingAndPagination("questions");
     this.openSnackBar('Question deleted Successfully!!!', '');
-  }
+  }*/
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
