@@ -12,7 +12,8 @@ export const routes: Routes = [
     {
         path: '',
         component: PagesComponent, children: [
-            { path: '', loadChildren: 'app/pages/admin/admin.module#AdminModule', data: { breadcrumb: 'Admin' } },
+        { path: '', loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule', data: { breadcrumb: 'Dashboard' } },
+            { path: 'admin', loadChildren: 'app/pages/admin/admin.module#AdminModule', data: { breadcrumb: 'Master Data Management' } },
             { path: 'assessment', component: QuestionsComponent, data: { breadcrumb: 'Assessment' } },
             /* { path: 'dashboard', loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule', data: { breadcrumb: 'Dashboard' } },
             { path: 'users', loadChildren: 'app/pages/users/users.module#UsersModule', data: { breadcrumb: 'Users' } },

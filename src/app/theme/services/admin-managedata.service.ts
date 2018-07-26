@@ -7,6 +7,10 @@ import {PmvHeading} from "../models/pmv-heading.model";
 import {PmvSubHeading} from "../models/pmv-subheading.model";
 import {PmvQuestion} from "../models/pmv-question.model";
 import {Response} from "../models/response.model";
+import {Project} from "../models/project.model";
+import {Company} from "../models/company.model";
+import {CompanyType} from "../models/company-type.model";
+import {Client} from "../models/client.model";
 
 
 
@@ -53,4 +57,20 @@ export class AdminManagedService{
         return this.httpHelper.postDataWithoutAuthentication<Response>('getPmvSubHeadings',request);
     }
 
+
+    getProjects = (): Observable<Project[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<Project[]>('getProjects');
+    }
+
+    getCompanies = (): Observable<Company[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<Company[]>('getCompanies');
+    }
+
+    getCompanyTypes = (): Observable<CompanyType[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<CompanyType[]>('getCompanyTypes');
+    }
+
+    getClients = (): Observable<Client[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<Client[]>('getClients');
+    }
 }

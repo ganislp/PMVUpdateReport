@@ -12,9 +12,17 @@
       <div class="flex-row-container p-20">
         <label class="label-height">Select:</label>
         <mat-form-field>
-          <mat-select placeholder="Deal Name" [(value)]="selectedDealId">
-            <mat-option *ngFor="let deal of deals" [value]="deal.id">
-              {{deal.name}}
+          <mat-select placeholder="Project Name" [(value)]="selectedProjectId">
+            <mat-option *ngFor="let project of projects" [value]="project.id">
+              {{project.projectName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Company Name" [(value)]="selectedCompanyId">
+            <mat-option *ngFor="let company of companies" [value]="company.id">
+              {{company.companyName}} ({{company.companyType}})
             </mat-option>
           </mat-select>
         </mat-form-field>

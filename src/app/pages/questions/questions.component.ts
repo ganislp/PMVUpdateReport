@@ -3,6 +3,9 @@ import { forkJoin } from "rxjs/observable/forkJoin";
 
 import { ApiService } from '../../theme/services';
 import { Subheading, Question, Deal } from '../admin/add-item-dialog/item.model';
+import {AdminManagedService} from "../../theme/services/admin-managedata.service";
+import {Project} from "../../theme/models/project.model";
+import {Company} from "../../theme/models/company.model";
 
 @Component({
   selector: 'app-questions',
@@ -17,22 +20,26 @@ export class QuestionsComponent implements OnInit {
   questions: Question[];
   years: number[];
   quarters: string[];
-  deals: Deal[];
+  //deals: Deal[];
+  projects:Project[];
+  companies:Company[];
 
-  selectedDealId: number;
+  selectedProjectId: number;
+  selectedCompanyId: number;
   selectedYear: number;
   selectedQuarter: string;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService,private adminManagedService :AdminManagedService) { }
 
   ngOnInit() {
     let subscription = forkJoin([this.apiService.get("subheadings.json"), this.apiService.get("questions.json"),
-    this.apiService.get("years.json"), this.apiService.get("quarters.json"), this.apiService.get("deals.json")]).subscribe(results => {
+    this.apiService.get("years.json"), this.apiService.get("quarters.json"), this.adminManagedService.getProjects(),this.adminManagedService.getCompanies()]).subscribe(results => {
       this.subheadings = results[0];
       this.questions = results[1];
       this.years = results[2];
       this.quarters = results[3];
-      this.deals = results[4];
+      this.projects = results[4];
+      this.companies = results[5];
       this.mapQuestionsToSubheadings();
     }, error => {
       console.log("Couldn't retrieve subheadings and question")

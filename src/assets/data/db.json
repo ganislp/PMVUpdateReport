@@ -621,4 +621,34 @@
     }
 
   ]
+,
+  "getProjects": [
+    {
+      "id": 1,
+      "projectName": "Afgri"
+    }
+    ],
+
+  "getCompanies": [
+    {
+      "id": 1,
+      "companyName": "Afgri",
+      "companyType": "Afgri",
+      "projectId" :1
+    }
+],
+    "getCompanyTypes": [
+    {
+    "id": 1,
+    "companyType": "Afgri"
+    }
+  ]
+
+,
+  "getClients": [
+    {
+      "id": 1,
+      "clientName": "Afgri"
+    }
+  ]
 }
