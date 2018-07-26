@@ -1,23 +1,8 @@
 <h1 mat-dialog-title>
-    <div [ngSwitch]="itemType">
-        <div *ngSwitchCase="1">
-            <span *ngIf="!item?.headingId ">Add Heading</span>
-            <span *ngIf="item?.headingId">Edit Heading</span>
-        </div>
-        <div *ngSwitchCase="2">
-            <span *ngIf="!item?.subHeadingId ">Add SubHeading</span>
-            <span *ngIf="item?.subHeadingId">Edit SubHeading</span>
-        </div>
-        <div *ngSwitchCase="3">
-            <span *ngIf="!item?.questionId ">Add Question</span>
-            <span *ngIf="item?.questionId">Edit Question</span>
-        </div>
-    </div>
+    <span *ngIf="!item?.id">Add</span>
+    <span *ngIf="item?.id">Edit</span> Item</h1>
 
 
-
-
-</h1>
 <div mat-dialog-content>
     <form [formGroup]="form" class="user-form">
         <!-- <mat-tab-group class="vertical-tabs">
@@ -50,23 +35,8 @@
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
     <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="save()">
-
-
-
-        <div [ngSwitch]="itemType">
-            <div *ngSwitchCase="1">
-                <span *ngIf="!item?.headingId ">Save</span>
-                <span *ngIf="item?.headingId">Update</span>
-            </div>
-            <div *ngSwitchCase="2">
-                <span *ngIf="!item?.subHeadingId ">Save</span>
-                <span *ngIf="item?.subHeadingId">Update</span>
-            </div>
-            <div *ngSwitchCase="3">
-                <span *ngIf="!item?.questionId ">Save</span>
-                <span *ngIf="item?.questionId">Update</span>
-            </div>
-        </div>
+        <span *ngIf="!item?.id">Save</span>
+        <span *ngIf="item?.id">Update</span>
 
     </button>
     <button mat-raised-button color="warn" (click)="close()">Cancel</button>

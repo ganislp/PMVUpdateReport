@@ -1,4 +1,4 @@
 export class PmvHeading{
-    headingId:number;
+    id:number;
     heading:string;
 }

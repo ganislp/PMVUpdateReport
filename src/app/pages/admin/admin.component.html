@@ -24,14 +24,14 @@
                         <mat-table #table [dataSource]="headingsDataSource" matSort>
 
                             <!-- ID Column -->
-                            <ng-container matColumnDef="headingId">
-                                <mat-header-cell *matHeaderCellDef > ID. </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.headingId}} </mat-cell>
+                            <ng-container matColumnDef="id">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
                             </ng-container>
 
                             <!-- Name Column -->
-                            <ng-container matColumnDef="heading">
-                                <mat-header-cell *matHeaderCellDef> Heading </mat-header-cell>
+                            <ng-container matColumnDef="heading" >
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Heading </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.heading}} </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="edit">
@@ -44,7 +44,7 @@
 
                             </ng-container>
 
-                            <ng-container matColumnDef="delete">
+                        <!--    <ng-container matColumnDef="delete">
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                                 <mat-cell *matCellDef="let group" (click)="$event.stopPropagation()">
                                     <button mat-button (click)="onDelete(group.id)">
@@ -52,12 +52,12 @@
                                     </button>
                                 </mat-cell>
 
-                            </ng-container>
+                            </ng-container>-->
 
 
                             <mat-header-row *matHeaderRowDef="pmvHeadingDisplayedColumns"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: pmvHeadingDisplayedColumns;" class="selectable-row" [ngClass]="{'bg-primary': selectedHeadingId == row.headingId}"
-                                (click)="highlightSubHeadings('pmvHeadings', row)"></mat-row>
+                            <mat-row *matRowDef="let row; columns: pmvHeadingDisplayedColumns;" class="selectable-row" [ngClass]="{'bg-primary': selectedHeadingId == row.id}"
+                                (click)="highlight('pmvSubheadings', row)"></mat-row>
                         </mat-table>
 
                         <mat-paginator #pmvHeadingsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
@@ -78,19 +78,19 @@
                         <mat-table #table [dataSource]="subHeadingsDataSource" matSort>
 
                             <!-- ID Column -->
-                            <ng-container matColumnDef="subHeadingId">
-                                <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.subHeadingId}} </mat-cell>
+                            <ng-container matColumnDef="id">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
                             </ng-container>
 
                             <!-- Name Column -->
                             <ng-container matColumnDef="subHeading">
-                                <mat-header-cell *matHeaderCellDef> Sub Heading </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Sub Heading </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.subHeading}} </mat-cell>
                             </ng-container>
 
-                            <ng-container matColumnDef="heading">
-                                <mat-header-cell *matHeaderCellDef> Heading </mat-header-cell>
+                            <ng-container matColumnDef="heading" >
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Heading </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.heading}} </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="edit">
@@ -103,7 +103,7 @@
 
                             </ng-container>
 
-                            <ng-container matColumnDef="delete">
+                          <!--  <ng-container matColumnDef="delete">
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                                 <mat-cell *matCellDef="let group" (click)="$event.stopPropagation()">
                                     <button mat-button (click)="onDelete(group.id)">
@@ -111,7 +111,7 @@
                                     </button>
                                 </mat-cell>
 
-                            </ng-container>
+                            </ng-container>-->
 
 
 
@@ -119,8 +119,8 @@
 
 
                             <mat-header-row *matHeaderRowDef="pmvSubHeadingDisplayedColumns"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: pmvSubHeadingDisplayedColumns;" class="selectable-row" [ngClass]="{'bg-primary': selectedSubHeadingId == row.subHeadingId}"
-                                (click)="highlightQuestions('pmvSubheadings', row)"></mat-row>
+                            <mat-row *matRowDef="let row; columns: pmvSubHeadingDisplayedColumns;" class="selectable-row" [ngClass]="{'bg-primary': selectedSubHeadingId == row.id}"
+                                (click)="highlightQuestions('pmvQuestions', row)"></mat-row>
                         </mat-table>
 
                         <mat-paginator #pmvSubheadingsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
@@ -148,15 +148,15 @@
                                             <mat-table class="wide-table" #table [dataSource]="pmvQuestionsDataSource" matSort>
 
                                                 <!-- ID Column -->
-                            <ng-container matColumnDef="questionId">
-                                <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.questionId}} </mat-cell>
+                            <ng-container matColumnDef="id">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
                             </ng-container>
 
                             <!-- Question Column -->
                             <ng-container matColumnDef="question">
-                                <mat-header-cell *matHeaderCellDef [ngClass]="'customWidthClass'"> Question </mat-header-cell>
-                                <mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'"> {{element.question}} </mat-cell>
+                                <mat-header-cell *matHeaderCellDef [ngClass]="'customWidthClass'" mat-sort-header> Question </mat-header-cell>
+                                <mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'" > {{element.question}} </mat-cell>
                             </ng-container>
 
                             <ng-container matColumnDef="edit">
@@ -166,15 +166,15 @@
                                 </mat-cell>
                             </ng-container>
 
-                            <ng-container matColumnDef="delete">
+                          <!--  <ng-container matColumnDef="delete">
                                 <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
                                     <mat-icon class="selectable-row" (click)="deleteQuestion(element)">delete</mat-icon>
                                 </mat-cell>
-                            </ng-container>
+                            </ng-container>-->
 
                             <mat-header-row *matHeaderRowDef="displayedColumnsQuestions"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: displayedColumnsQuestions;" (click)="selectedquestionId = row.questionId"></mat-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumnsQuestions;" (click)="selectedquestionId = row.id"></mat-row>
                         </mat-table>
 
                         <mat-paginator #pmvQuestionsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

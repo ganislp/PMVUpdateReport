@@ -30,16 +30,27 @@ export class AdminManagedService{
     }
 
     updatePmvQuestion = (request: PmvQuestion): Observable<Response> => {
-        return this.httpHelper.putDataWithoutAuthentication<Response>('updatePmvQuestion', request);
+        return this.httpHelper.putDataWithoutAuthentication<Response>('getQuestions/'+request.id, request);
+    }
+
+    addPmvQuestion = (request: PmvQuestion): Observable<Response> => {
+        return this.httpHelper.postDataWithoutAuthentication<Response>('getQuestions',request);
     }
 
     updatePmvHeading = (request: PmvHeading): Observable<Response> => {
-        return this.httpHelper.putDataWithoutAuthentication<Response>('getPmvHeadings/?headingId=',request);
+        return this.httpHelper.putDataWithoutAuthentication<Response>('getPmvHeadings/'+request.id,request);
+    }
+
+    addPmvHeading = (request: PmvHeading): Observable<Response> => {
+        return this.httpHelper.postDataWithoutAuthentication<Response>('getPmvHeadings',request);
     }
 
     updatePmvSubHeading = (request: PmvSubHeading): Observable<Response> => {
-        return this.httpHelper.putDataWithoutAuthentication<Response>('updatePmvSubHeading', request);
+        return this.httpHelper.putDataWithoutAuthentication<Response>('getPmvSubHeadings/'+request.id, request);
     }
 
+    addPmvSubHeading = (request: PmvSubHeading): Observable<Response> => {
+        return this.httpHelper.postDataWithoutAuthentication<Response>('getPmvSubHeadings',request);
+    }
 
 }

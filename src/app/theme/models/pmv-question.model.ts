@@ -1,5 +1,5 @@
 export class PmvQuestion {
-    questionId: number;
+    id: number;
     headingId: number;
     subheadingId: number;
     question: string;
