@@ -21,22 +21,22 @@
                     </div>
 
                     <div class="mat-elevation-z8">
-                        <mat-table #table [dataSource]="headingsDataSource" matSort>
+                        <mat-table #table [dataSource]="headingsDataSource" #pmvHeadingSort="matSort" matSort>
 
                             <!-- ID Column -->
                             <ng-container matColumnDef="id">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
+                                <mat-header-cell *matHeaderCellDef mat-sort-header="id"> ID. </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
                             </ng-container>
 
                             <!-- Name Column -->
-                            <ng-container matColumnDef="heading" >
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Heading </mat-header-cell>
+                            <ng-container matColumnDef="heading">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header="heading"> Heading </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.heading}} </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="edit">
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                                <mat-cell *matCellDef="let group" (click)="$event.stopPropagation()">
+                                <mat-cell *matCellDef="let group">
                                     <button mat-button (click)="openAddEditItemDialog(1, group)">
                                         <mat-icon>edit</mat-icon>
                                     </button>
@@ -44,7 +44,7 @@
 
                             </ng-container>
 
-                        <!--    <ng-container matColumnDef="delete">
+                            <!--    <ng-container matColumnDef="delete">
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                                 <mat-cell *matCellDef="let group" (click)="$event.stopPropagation()">
                                     <button mat-button (click)="onDelete(group.id)">
@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="mat-elevation-z8">
-                        <mat-table #table [dataSource]="subHeadingsDataSource" matSort>
+                        <mat-table #table [dataSource]="subHeadingsDataSource" #pmvSubheadingsSort="matSort" matSort>
 
                             <!-- ID Column -->
                             <ng-container matColumnDef="id">
@@ -89,7 +89,7 @@
                                 <mat-cell *matCellDef="let element"> {{element.subHeading}} </mat-cell>
                             </ng-container>
 
-                            <ng-container matColumnDef="heading" >
+                            <ng-container matColumnDef="heading">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Heading </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.heading}} </mat-cell>
                             </ng-container>
@@ -103,7 +103,7 @@
 
                             </ng-container>
 
-                          <!--  <ng-container matColumnDef="delete">
+                            <!--  <ng-container matColumnDef="delete">
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                                 <mat-cell *matCellDef="let group" (click)="$event.stopPropagation()">
                                     <button mat-button (click)="onDelete(group.id)">
@@ -112,11 +112,6 @@
                                 </mat-cell>
 
                             </ng-container>-->
-
-
-
-
-
 
                             <mat-header-row *matHeaderRowDef="pmvSubHeadingDisplayedColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: pmvSubHeadingDisplayedColumns;" class="selectable-row" [ngClass]="{'bg-primary': selectedSubHeadingId == row.id}"
@@ -136,18 +131,18 @@
                         </ngb-alert>
                     </p> -->
                     <!-- please not valide quitions from -->
-                                        <div class="add-item" *ngIf="this.selectedHeadingId >= 7 && this.selectedSubHeadingId >= 7">
-                                            <mat-form-field>
-                                                <input matInput (keyup)="applyFilterQuestions($event.target.value)" placeholder="Filter">
-                                            </mat-form-field>
-                                            <button mat-raised-button color="primary" (click)="openAddEditItemDialog(3, null)">
-                                                <mat-icon>add</mat-icon>Add</button>
-                                        </div>
+                    <div class="add-item" *ngIf="this.selectedHeadingId >= 7 && this.selectedSubHeadingId >= 7">
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilterQuestions($event.target.value)" placeholder="Filter">
+                        </mat-form-field>
+                        <button mat-raised-button color="primary" (click)="openAddEditItemDialog(3, null)">
+                            <mat-icon>add</mat-icon>Add</button>
+                    </div>
 
-                                        <div class="mat-elevation-z8" *ngIf="this.selectedHeadingId >= 7 && this.selectedSubHeadingId >= 7">
-                                            <mat-table class="wide-table" #table [dataSource]="pmvQuestionsDataSource" matSort>
+                    <div class="mat-elevation-z8" *ngIf="this.selectedHeadingId >= 7 && this.selectedSubHeadingId >= 7">
+                        <mat-table class="wide-table" #table [dataSource]="pmvQuestionsDataSource" #pmvQuestionsSort="matSort" matSort>
 
-                                                <!-- ID Column -->
+                            <!-- ID Column -->
                             <ng-container matColumnDef="id">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
@@ -156,7 +151,7 @@
                             <!-- Question Column -->
                             <ng-container matColumnDef="question">
                                 <mat-header-cell *matHeaderCellDef [ngClass]="'customWidthClass'" mat-sort-header> Question </mat-header-cell>
-                                <mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'" > {{element.question}} </mat-cell>
+                                <mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'"> {{element.question}} </mat-cell>
                             </ng-container>
 
                             <ng-container matColumnDef="edit">
@@ -166,7 +161,7 @@
                                 </mat-cell>
                             </ng-container>
 
-                          <!--  <ng-container matColumnDef="delete">
+                            <!--  <ng-container matColumnDef="delete">
                                 <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
                                     <mat-icon class="selectable-row" (click)="deleteQuestion(element)">delete</mat-icon>
