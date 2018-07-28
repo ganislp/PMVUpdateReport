@@ -6,11 +6,11 @@ import { MatDialog, MatTableDataSource, MatSort, MatPaginator, MatSnackBar } fro
 import { ApiService } from '../../theme/services';
 import { AddItemComponent } from './add-item-dialog/add-item-dialog.component'
 import { Item, Question, ItemTypes } from './add-item-dialog/item.model';
-import {AdminManagedService} from "../../theme/services/admin-managedata.service";
-import {PmvHeading} from "../../theme/models/pmv-heading.model";
-import {PmvSubHeading} from "../../theme/models/pmv-subheading.model";
-import {PmvQuestion} from "../../theme/models/pmv-question.model";
-import {Response} from "../../theme/models/response.model";
+import { AdminManagedService } from "../../theme/services/admin-managedata.service";
+import { PmvHeading } from "../../theme/models/pmv-heading.model";
+import { PmvSubHeading } from "../../theme/models/pmv-subheading.model";
+import { PmvQuestion } from "../../theme/models/pmv-question.model";
+import { Response } from "../../theme/models/response.model";
 
 
 
@@ -34,8 +34,8 @@ export class AdminComponent implements OnInit {
   pmvQuestions: PmvQuestion[];
 
   //Mat table variables
-  pmvHeadingDisplayedColumns: string[] = ['id', 'heading','edit'];
-  pmvSubHeadingDisplayedColumns: string[] = ['id', 'subHeading','edit'];
+  pmvHeadingDisplayedColumns: string[] = ['id', 'heading', 'edit'];
+  pmvSubHeadingDisplayedColumns: string[] = ['id', 'subHeading', 'edit'];
   displayedColumnsQuestions: string[] = ['id', 'question', 'edit'];
   headingsDataSource: MatTableDataSource<PmvHeading>;
   subHeadingsDataSource: MatTableDataSource<PmvSubHeading>;
@@ -49,7 +49,7 @@ export class AdminComponent implements OnInit {
   @ViewChild('pmvQuestionsPaginator') pmvQuestionsPaginator: MatPaginator;
   @ViewChild('pmvQuestionsSort') pmvQuestionsSort: MatSort;
 
-  constructor(private apiService: ApiService,private adminManagedService :AdminManagedService,
+  constructor(private apiService: ApiService, private adminManagedService: AdminManagedService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) { }
@@ -57,48 +57,48 @@ export class AdminComponent implements OnInit {
 
   getPmvHeadings = (): void => {
     this.adminManagedService.getPmvHeadings().subscribe(
-        (response) => {
-          response = this.pmvHeadings = response;
-          this.showSpinner = true;
-          this.headingsDataSource = new MatTableDataSource<PmvHeading>(this.pmvHeadings);
-          this.setUpSortingAndPagination("pmvHeadings");
-        }
-        , (error) => {
-          this.showSpinner = false;
-          console.log(error);
-        }
+      (response) => {
+        response = this.pmvHeadings = response;
+        this.showSpinner = true;
+        this.headingsDataSource = new MatTableDataSource<PmvHeading>(this.pmvHeadings);
+        this.setUpSortingAndPagination("pmvHeadings");
+      }
+      , (error) => {
+        this.showSpinner = false;
+        console.log(error);
+      }
     );
 
   }
 
-  getPmvSubHeadingsByHeadingId = (headingId:number): void => {
+  getPmvSubHeadingsByHeadingId = (headingId: number): void => {
     this.adminManagedService.getPmvSubHeadingsByHeadingId(this.selectedHeadingId).subscribe(
-        (response) => {
-          response = this.pmvSubHeadings = response;
-          this.showSpinner = true;
-          this.subHeadingsDataSource = new MatTableDataSource<PmvSubHeading>(this.pmvSubHeadings);
-          this.setUpSortingAndPagination("pmvSubheadings");
-        }
-        , (error) => {
-          this.showSpinner = false;
-          console.log(error);
-        }
+      (response) => {
+        response = this.pmvSubHeadings = response;
+        this.showSpinner = true;
+        this.subHeadingsDataSource = new MatTableDataSource<PmvSubHeading>(this.pmvSubHeadings);
+        this.setUpSortingAndPagination("pmvSubheadings");
+      }
+      , (error) => {
+        this.showSpinner = false;
+        console.log(error);
+      }
     );
 
   }
 
-  getQuestionsByHeadingIdAndSubHeadingId = (headingId:number,subheadingId:number): void => {
-    this.adminManagedService.getQuestionsByHeadingIdAndSubHeadingId(this.selectedHeadingId,this.selectedSubHeadingId).subscribe(
-        (response) => {
-          response = this.pmvQuestions = response;
-          this.showSpinner = true;
-          this.pmvQuestionsDataSource = new MatTableDataSource<PmvQuestion>(this.pmvQuestions);
-          this.setUpSortingAndPagination("pmvQuestions");
-        }
-        , (error) => {
-          this.showSpinner = false;
-          console.log(error);
-        }
+  getQuestionsByHeadingIdAndSubHeadingId = (headingId: number, subheadingId: number): void => {
+    this.adminManagedService.getQuestionsByHeadingIdAndSubHeadingId(this.selectedHeadingId, this.selectedSubHeadingId).subscribe(
+      (response) => {
+        response = this.pmvQuestions = response;
+        this.showSpinner = true;
+        this.pmvQuestionsDataSource = new MatTableDataSource<PmvQuestion>(this.pmvQuestions);
+        this.setUpSortingAndPagination("pmvQuestions");
+      }
+      , (error) => {
+        this.showSpinner = false;
+        console.log(error);
+      }
     );
 
   }
@@ -107,31 +107,30 @@ export class AdminComponent implements OnInit {
   highlight(tableName: string, row: PmvHeading) {
     if (tableName == "pmvSubheadings") {
       this.selectedHeadingId = row.id;
-    }
-      if (this.selectedHeadingId >= 0) {
-        this.getPmvSubHeadingsByHeadingId(this.selectedHeadingId);
-        this.showSpinner = true;
-
-
-    }
-   /* else if(tableName == "pmvQuestions") {
-      this.selectedSubHeadingId = row.id;
-      if (this.selectedHeadingId > 0 && this.selectedSubHeadingId > 0) {
-        this.getQuestionsByHeadingIdAndSubHeadingId(this.selectedHeadingId, this.selectedSubHeadingId);
-        this.showSpinner = true;
-      }
-    }*/
-  }
-
-  highlightQuestions(tableName: string, row: PmvSubHeading) {
-    if (tableName == "pmvQuestions") {
+      this.selectedSubHeadingId = -1;
+    } else if (tableName == "pmvQuestions") {
       this.selectedSubHeadingId = row.id;
     }
     if (this.selectedHeadingId > 0 && this.selectedSubHeadingId > 0) {
-      this.getQuestionsByHeadingIdAndSubHeadingId(this.selectedHeadingId,this.selectedSubHeadingId);
+      this.getQuestionsByHeadingIdAndSubHeadingId(this.selectedHeadingId, this.selectedSubHeadingId);
       this.showSpinner = true;
 
     }
+    if (this.selectedHeadingId >= 0 && this.selectedSubHeadingId < 0) {
+      this.getPmvSubHeadingsByHeadingId(this.selectedHeadingId);
+      this.showSpinner = true;
+    }
+    /* else if(tableName == "pmvQuestions") {
+       this.selectedSubHeadingId = row.id;
+       if (this.selectedHeadingId > 0 && this.selectedSubHeadingId > 0) {
+         this.getQuestionsByHeadingIdAndSubHeadingId(this.selectedHeadingId, this.selectedSubHeadingId);
+         this.showSpinner = true;
+       }
+     }*/
+  }
+
+  highlightQuestions(tableName: string, row: PmvSubHeading) {
+
 
   }
 
@@ -161,92 +160,92 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  public updateQuestion(pmvQuestion:PmvQuestion){
+  public updateQuestion(pmvQuestion: PmvQuestion) {
     this.adminManagedService.updatePmvQuestion(pmvQuestion).subscribe(
-        updateUserResponse => {
-         // this.getUsers()
-          //this.notificationsService.notify('info', '', updateUserResponse.message);
-        },
-        (errorResponse: Response) => {
-          console.log(errorResponse);
-          //this.notificationsService.notify('error', '', errorResponse.error.toString());
+      updateUserResponse => {
+        // this.getUsers()
+        //this.notificationsService.notify('info', '', updateUserResponse.message);
+      },
+      (errorResponse: Response) => {
+        console.log(errorResponse);
+        //this.notificationsService.notify('error', '', errorResponse.error.toString());
 
-        });
+      });
 
 
   }
 
-  public addPmvQuestion(pmvQuestion:PmvQuestion){
+  public addPmvQuestion(pmvQuestion: PmvQuestion) {
     this.adminManagedService.addPmvQuestion(pmvQuestion).subscribe(
-        updateUserResponse => {
-          // this.getUsers()
-          //this.notificationsService.notify('info', '', updateUserResponse.message);
-        },
-        (errorResponse: Response) => {
-          console.log(errorResponse);
-          //this.notificationsService.notify('error', '', errorResponse.error.toString());
+      updateUserResponse => {
+        // this.getUsers()
+        //this.notificationsService.notify('info', '', updateUserResponse.message);
+      },
+      (errorResponse: Response) => {
+        console.log(errorResponse);
+        //this.notificationsService.notify('error', '', errorResponse.error.toString());
 
-        });
+      });
 
 
   }
 
-  public updatePmvHeading(pmvHeading:PmvHeading){
+  public updatePmvHeading(pmvHeading: PmvHeading) {
     this.adminManagedService.updatePmvHeading(pmvHeading).subscribe(
-        updateUserResponse => {
-          // this.getUsers()
-          //this.notificationsService.notify('info', '', updateUserResponse.message);
-        },
-        (errorResponse: Response) => {
-          console.log(errorResponse);
-          //this.notificationsService.notify('error', '', errorResponse.error.toString());
+      updateUserResponse => {
+        // this.getUsers()
+        //this.notificationsService.notify('info', '', updateUserResponse.message);
+      },
+      (errorResponse: Response) => {
+        console.log(errorResponse);
+        //this.notificationsService.notify('error', '', errorResponse.error.toString());
 
-        });
+      });
 
 
   }
 
-  public addPmvHeading(pmvHeading:PmvHeading){
+  public addPmvHeading(pmvHeading: PmvHeading) {
     this.adminManagedService.addPmvHeading(pmvHeading).subscribe(
-        updateUserResponse => {
-          // this.getUsers()
-          //this.notificationsService.notify('info', '', updateUserResponse.message);
-        },
-        (errorResponse: Response) => {
-          console.log(errorResponse);
-          //this.notificationsService.notify('error', '', errorResponse.error.toString());
+      updateUserResponse => {
+        // this.getUsers()
+        //this.notificationsService.notify('info', '', updateUserResponse.message);
+      },
+      (errorResponse: Response) => {
+        console.log(errorResponse);
+        //this.notificationsService.notify('error', '', errorResponse.error.toString());
 
-        });
+      });
 
 
   }
 
-  public updateSubPmvHeading(pmvSubHeading:PmvSubHeading){
+  public updateSubPmvHeading(pmvSubHeading: PmvSubHeading) {
     this.adminManagedService.updatePmvSubHeading(pmvSubHeading).subscribe(
-        updateUserResponse => {
-          // this.getUsers()
-          //this.notificationsService.notify('info', '', updateUserResponse.message);
-        },
-        (errorResponse: Response) => {
-          console.log(errorResponse);
-          //this.notificationsService.notify('error', '', errorResponse.error.toString());
+      updateUserResponse => {
+        // this.getUsers()
+        //this.notificationsService.notify('info', '', updateUserResponse.message);
+      },
+      (errorResponse: Response) => {
+        console.log(errorResponse);
+        //this.notificationsService.notify('error', '', errorResponse.error.toString());
 
-        });
+      });
 
 
   }
 
-  public addSubPmvHeading(pmvSubHeading:PmvSubHeading){
+  public addSubPmvHeading(pmvSubHeading: PmvSubHeading) {
     this.adminManagedService.addPmvSubHeading(pmvSubHeading).subscribe(
-        updateUserResponse => {
-          // this.getUsers()
-          //this.notificationsService.notify('info', '', updateUserResponse.message);
-        },
-        (errorResponse: Response) => {
-          console.log(errorResponse);
-          //this.notificationsService.notify('error', '', errorResponse.error.toString());
+      updateUserResponse => {
+        // this.getUsers()
+        //this.notificationsService.notify('info', '', updateUserResponse.message);
+      },
+      (errorResponse: Response) => {
+        console.log(errorResponse);
+        //this.notificationsService.notify('error', '', errorResponse.error.toString());
 
-        });
+      });
 
 
   }
@@ -298,35 +297,35 @@ export class AdminComponent implements OnInit {
 
 
   private updateItem(itemType: ItemTypes, item: Item | PmvQuestion | PmvHeading | PmvSubHeading) {
-      let index: number;
+    let index: number;
 
-     if (itemType == ItemTypes.questions) {
-       this.updateQuestion(<PmvQuestion>item);
-       /*index = this.pmvQuestions.findIndex(el => el.questionId == item.id);
-       this.pmvQuestions.splice(index, 0, item);*/
-     }
-     else if (itemType == ItemTypes.headings) {
-       this.updatePmvHeading(<PmvHeading>item);
-     }
+    if (itemType == ItemTypes.questions) {
+      this.updateQuestion(<PmvQuestion>item);
+      /*index = this.pmvQuestions.findIndex(el => el.questionId == item.id);
+      this.pmvQuestions.splice(index, 0, item);*/
+    }
+    else if (itemType == ItemTypes.headings) {
+      this.updatePmvHeading(<PmvHeading>item);
+    }
 
-     else if (itemType == ItemTypes.subheadings) {
-       this.updateSubPmvHeading(<PmvSubHeading>item);
-     }
+    else if (itemType == ItemTypes.subheadings) {
+      this.updateSubPmvHeading(<PmvSubHeading>item);
+    }
 
     /* else {
        if (!this.pmvSubHeadings) this.pmvSubHeadings = [];
        this.pmvSubHeadings.push(item | PmvSubHeading);
      }*/
 
-   //new this.findAndReplaceInArray(itemType == ItemTypes.questions ? this.questions : (itemType == ItemTypes.headings
-   // ? this.headings : this.subheadings), item);
+    //new this.findAndReplaceInArray(itemType == ItemTypes.questions ? this.questions : (itemType == ItemTypes.headings
+    // ? this.headings : this.subheadings), item);
   }
 
-/*  private findAndReplaceInArray(arr: any[], item: Item | Question) {
-    let index = arr.findIndex(el => el.id == item.id);
-    arr[index] = item;
-    this.openSnackBar('Save Successful!!!', '');    
-  }*/
+  /*  private findAndReplaceInArray(arr: any[], item: Item | Question) {
+      let index = arr.findIndex(el => el.id == item.id);
+      arr[index] = item;
+      this.openSnackBar('Save Successful!!!', '');    
+    }*/
 
   private addItem(itemType: ItemTypes, item: Item | PmvQuestion | PmvHeading | PmvSubHeading) {
     /*if (itemType == ItemTypes.questions) {
@@ -360,11 +359,11 @@ export class AdminComponent implements OnInit {
       this.openSnackBar('Heading added Successfully!!!', '');
     }
 
-    else if(itemType == ItemTypes.subheadings){
+    else if (itemType == ItemTypes.subheadings) {
       if (!this.pmvSubHeadings) this.pmvSubHeadings = [];
 
       item.id = Math.round(Math.floor(Math.random() * (1000 - 100 + 1)) + 100);
-      (<PmvSubHeading>item).headingId= this.selectedHeadingId;
+      (<PmvSubHeading>item).headingId = this.selectedHeadingId;
       //this.pmvHeadings.push(<PmvHeading>item);
       this.addSubPmvHeading(<PmvSubHeading>item);
       this.setUpSortingAndPagination("pmvSubheadings");
@@ -372,10 +371,10 @@ export class AdminComponent implements OnInit {
 
     }
 
-    else if(itemType == ItemTypes.questions) {
+    else if (itemType == ItemTypes.questions) {
       item.id = Math.round(Math.floor(Math.random() * (1000 - 100 + 1)) + 100);
-      (<PmvQuestion>item).headingId= this.selectedHeadingId;
-      (<PmvQuestion>item).subheadingId= this.selectedSubHeadingId;
+      (<PmvQuestion>item).headingId = this.selectedHeadingId;
+      (<PmvQuestion>item).subheadingId = this.selectedSubHeadingId;
       this.addPmvQuestion(<PmvQuestion>item);
       this.setUpSortingAndPagination("pmvQuestions");
       this.openSnackBar('Question added Successfully!!!', '');
@@ -386,42 +385,42 @@ export class AdminComponent implements OnInit {
 
 
 
- /* getDescription(tableName: string, id: number) {
-    if (id > 0) {
-      return tableName == "headings" ? this.headings.find(item => item.id == id).name : this.headings.find(item => item.id == id).name;
-    }
-    return "";
-  }*/
+  /* getDescription(tableName: string, id: number) {
+     if (id > 0) {
+       return tableName == "headings" ? this.headings.find(item => item.id == id).name : this.headings.find(item => item.id == id).name;
+     }
+     return "";
+   }*/
 
 
 
 
-/*  highlight(tableName: string, row: PmvHeading) {
-    if (tableName == "headings") {
-      this.selectedHeadingId = row.headingId;
-    } else if (tableName == "subheadings") {
-      this.selectedSubHeadingId = row.subHeadingId;
-    }
-    if (this.selectedHeadingId >= 0 && this.selectedSubHeadingId >= 0) {
-      this.showSpinner = true;
-      this.subscriptions.push(this.apiService.get("questions.json").subscribe((response) => {
-        this.questions = response;
-        this.questionsDataSource = new MatTableDataSource<Question>(this.questions);
-        this.setUpSortingAndPagination("questions");
-        this.showSpinner = false;
-      }, (error) => {
-        this.showSpinner = false;
-        console.log("Error retrieving deals");
-      }))
-    }
-  }*/
+  /*  highlight(tableName: string, row: PmvHeading) {
+      if (tableName == "headings") {
+        this.selectedHeadingId = row.headingId;
+      } else if (tableName == "subheadings") {
+        this.selectedSubHeadingId = row.subHeadingId;
+      }
+      if (this.selectedHeadingId >= 0 && this.selectedSubHeadingId >= 0) {
+        this.showSpinner = true;
+        this.subscriptions.push(this.apiService.get("questions.json").subscribe((response) => {
+          this.questions = response;
+          this.questionsDataSource = new MatTableDataSource<Question>(this.questions);
+          this.setUpSortingAndPagination("questions");
+          this.showSpinner = false;
+        }, (error) => {
+          this.showSpinner = false;
+          console.log("Error retrieving deals");
+        }))
+      }
+    }*/
 
-/*  deleteQuestion(q: Question): void {
-    let index = this.questions.findIndex(qes => qes.id == q.id);
-    this.questions.splice(index, 1);
-    this.setUpSortingAndPagination("questions");
-    this.openSnackBar('Question deleted Successfully!!!', '');
-  }*/
+  /*  deleteQuestion(q: Question): void {
+      let index = this.questions.findIndex(qes => qes.id == q.id);
+      this.questions.splice(index, 1);
+      this.setUpSortingAndPagination("questions");
+      this.openSnackBar('Question deleted Successfully!!!', '');
+    }*/
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {

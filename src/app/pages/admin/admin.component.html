@@ -64,7 +64,7 @@
                     </div>
                 </div>
 
-                <div class="table" *ngIf="this.selectedHeadingId >= 1">
+                <div class="table" *ngIf="selectedHeadingId >= 1">
                     <h3>Sub Headings</h3>
                     <div class="add-item">
                         <mat-form-field>
@@ -115,15 +115,15 @@
 
                             <mat-header-row *matHeaderRowDef="pmvSubHeadingDisplayedColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: pmvSubHeadingDisplayedColumns;" class="selectable-row" [ngClass]="{'bg-primary': selectedSubHeadingId == row.id}"
-                                (click)="highlightQuestions('pmvQuestions', row)"></mat-row>
+                                (click)="highlight('pmvQuestions', row)"></mat-row>
                         </mat-table>
 
                         <mat-paginator #pmvSubheadingsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
                     </div>
                 </div>
 
-                <div>
-                    <h3 *ngIf="this.selectedHeadingId >= 7 && this.selectedSubHeadingId >= 7">Questions</h3>
+                <div *ngIf="selectedHeadingId >= 7 && selectedSubHeadingId >= 7">
+                    <h3>Questions</h3>
 
                     <!--  <p *ngIf="selectedHeadingId < 0 && selectedSubHeadingId < 0">
                         <ngb-alert type="info" [dismissible]="false">
@@ -139,7 +139,7 @@
                             <mat-icon>add</mat-icon>Add</button>
                     </div>
 
-                    <div class="mat-elevation-z8" *ngIf="this.selectedHeadingId >= 7 && this.selectedSubHeadingId >= 7">
+                    <div class="mat-elevation-z8" *ngIf="selectedHeadingId >= 7 && selectedSubHeadingId >= 7">
                         <mat-table class="wide-table" #table [dataSource]="pmvQuestionsDataSource" #pmvQuestionsSort="matSort" matSort>
 
                             <!-- ID Column -->
