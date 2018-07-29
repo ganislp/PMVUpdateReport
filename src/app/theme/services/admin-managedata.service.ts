@@ -11,6 +11,7 @@ import { Project } from "../models/project.model";
 import { Company } from "../models/company.model";
 import { CompanyType } from "../models/company-type.model";
 import { Client } from "../models/client.model";
+import {QuestionType} from "../models/question-type.model";
 
 
 
@@ -40,6 +41,12 @@ export class AdminManagedService {
     addPmvQuestion = (request: PmvQuestion): Observable<Response> => {
         return this.httpHelper.postDataWithoutAuthentication<Response>('getQuestions', request);
     }
+
+    getQuestionTypes = (): Observable<QuestionType[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<QuestionType[]>('getQuestionTypes');
+    }
+
+
 
     updatePmvHeading = (request: PmvHeading): Observable<Response> => {
         return this.httpHelper.putDataWithoutAuthentication<Response>('getPmvHeadings/' + request.id, request);

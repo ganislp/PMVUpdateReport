@@ -3,6 +3,11 @@ export class Item {
     id: number;
 }
 
+export class SubItem {
+    name: string;
+    id: number;
+}
+
 export class Question {
     id: number;
     headingId: number;

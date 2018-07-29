@@ -36,7 +36,7 @@ export class AdminComponent implements OnInit {
   //Mat table variables
   pmvHeadingDisplayedColumns: string[] = ['id', 'heading', 'edit'];
   pmvSubHeadingDisplayedColumns: string[] = ['id', 'subHeading', 'edit'];
-  displayedColumnsQuestions: string[] = ['id', 'question', 'edit'];
+  displayedColumnsQuestions: string[] = ['id', 'question','questionType', 'edit'];
   headingsDataSource: MatTableDataSource<PmvHeading>;
   subHeadingsDataSource: MatTableDataSource<PmvSubHeading>;
   pmvQuestionsDataSource: MatTableDataSource<PmvQuestion>;

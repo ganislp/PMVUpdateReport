@@ -5,6 +5,8 @@ import { Item, ItemTypes, Question } from './item.model';
 import {PmvHeading} from "../../../theme/models/pmv-heading.model";
 import {PmvSubHeading} from "../../../theme/models/pmv-subheading.model";
 import {PmvQuestion} from "../../../theme/models/pmv-question.model";
+import {QuestionType} from "../../../theme/models/question-type.model";
+import {AdminManagedService} from "../../../theme/services/admin-managedata.service";
 
 @Component({
   selector: 'app-add-item-dialog',
@@ -13,16 +15,34 @@ import {PmvQuestion} from "../../../theme/models/pmv-question.model";
 })
 export class AddItemComponent implements OnInit {
   public form: FormGroup;
+  showSpinner: boolean;
+  questionTypes: QuestionType[];
+  questionTypeObj: QuestionType;
   public passwordHide: boolean = true;
   public itemType: ItemTypes;
   public item: Item | PmvQuestion |PmvHeading | PmvSubHeading;
   constructor(public dialogRef: MatDialogRef<AddItemComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public fb: FormBuilder) {
+    public fb: FormBuilder,private adminManagedService: AdminManagedService) {
     this.form = this.fb.group({
       /*  name: [null, Validators.compose([Validators.required, Validators.minLength(3)])],
        question: [null, Validators.compose([Validators.required, Validators.minLength(3)])] */
     });
+  }
+
+
+  getQuestionTypes = (): void => {
+    this.adminManagedService.getQuestionTypes().subscribe(
+        (response) => {
+          response = this.questionTypes = response;
+          this.showSpinner = true;
+        }
+        , (error) => {
+          this.showSpinner = false;
+          console.log(error);
+        }
+    );
+
   }
 
   ngOnInit() {
@@ -31,9 +51,13 @@ export class AddItemComponent implements OnInit {
       this.itemType = this.data.itemType;
       this.item = this.data.item;
       let initialValue: string;
+      let initialValueId: number;
       if (this.itemType == ItemTypes.questions) {
+        this.getQuestionTypes();
         initialValue = (<PmvQuestion>this.item) ? (<PmvQuestion>this.item).question : null;
+        initialValueId = (<PmvQuestion>this.item) ? (<PmvQuestion>this.item).questionType.id : null;
         this.form.addControl("question", new FormControl(initialValue, Validators.compose([Validators.required, Validators.minLength(10)])));
+        this.form.addControl("questionType", new FormControl(initialValueId, Validators.compose([Validators.required, Validators.minLength(10)])));
         this.form.removeControl("subHeading");
         this.form.removeControl("heading");
       }
@@ -85,7 +109,9 @@ export class AddItemComponent implements OnInit {
     if (!this.item) this.item = {} as Item | PmvQuestion |PmvHeading | PmvSubHeading;
 
     if (this.itemType == ItemTypes.questions) {
+      this.questionTypeObj = this.questionTypes.find(questionType => questionType.id == this.form.value['questionType']);
       (<PmvQuestion>this.item).question = this.form.value ? this.form.value['question'] : '';
+      (<PmvQuestion>this.item).questionType = this.questionTypeObj;
     }
     else if(this.itemType == ItemTypes.headings){
       (<PmvHeading>this.item).heading = this.form.value ? this.form.value['heading'] : '';

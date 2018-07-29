@@ -13,6 +13,15 @@
                         <textarea matInput formControlName="question"></textarea>
                         <mat-error *ngIf="form.controls['question']?.errors?.required">Question is required</mat-error>
                         <mat-error *ngIf="form.controls['question']?.hasError('minlength')">Question isn't long enough, minimum of 6 characters</mat-error>
+
+                    </mat-form-field>
+
+                    <mat-form-field *ngIf="itemType == 3">
+                        <mat-select placeholder="Question Type" formControlName="questionType" >
+                            <mat-option *ngFor="let questionType of questionTypes" [value]="questionType.id">
+                                {{questionType.questionType}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
 
                     <mat-form-field class="w-100" *ngIf="itemType == 1">

@@ -154,6 +154,16 @@
                                 <mat-cell *matCellDef="let element" [ngClass]="'customWidthClass'"> {{element.question}} </mat-cell>
                             </ng-container>
 
+                            <!-- Question Column -->
+
+
+
+                            <ng-container matColumnDef="questionType">
+                                <mat-header-cell *matHeaderCellDef  mat-sort-header> Question Type </mat-header-cell>
+                                <mat-cell *matCellDef="let element" > {{element.questionType.questionType}} </mat-cell>
+                            </ng-container>
+
+
                             <ng-container matColumnDef="edit">
                                 <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
                                 <mat-cell *matCellDef="let element">
