@@ -11,7 +11,8 @@ import { Project } from "../models/project.model";
 import { Company } from "../models/company.model";
 import { CompanyType } from "../models/company-type.model";
 import { Client } from "../models/client.model";
-import {QuestionType} from "../models/question-type.model";
+import { QuestionType } from "../models/question-type.model";
+import { AssessmentItem } from "../models/assessment.model";
 
 
 
@@ -24,6 +25,18 @@ export class AdminManagedService {
 
     getPmvHeadings = (): Observable<PmvHeading[]> => {
         return this.httpHelper.getDataWithoutAuthentication<PmvHeading[]>('getPmvHeadings');
+    }
+
+    getPmvSubHeadings = (): Observable<PmvSubHeading[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<PmvSubHeading[]>('getPmvSubHeadings');
+    }
+
+    getPmvQuestions = (): Observable<PmvQuestion[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<PmvQuestion[]>('getQuestions');
+    }
+
+    getPreparedAssessment = (): Observable<AssessmentItem[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<AssessmentItem[]>('getPreparedAssessment');
     }
 
     getPmvSubHeadingsByHeadingId = (headingId: number): Observable<PmvSubHeading[]> => {
@@ -45,7 +58,6 @@ export class AdminManagedService {
     getQuestionTypes = (): Observable<QuestionType[]> => {
         return this.httpHelper.getDataWithoutAuthentication<QuestionType[]>('getQuestionTypes');
     }
-
 
 
     updatePmvHeading = (request: PmvHeading): Observable<Response> => {

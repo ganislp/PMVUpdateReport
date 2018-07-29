@@ -223,6 +223,10 @@
       "id": 5,
       "headingId": 7,
       "subheadingId": 7,
+      "questionType": {
+        "id": 2,
+        "questionType": "attachment"
+      },
       "question": "Enquire with management on measures taken to address issues/ comprehensive plan to address deviation/s"
     },
     {
@@ -1144,6 +1148,68 @@
     {
       "id": 3,
       "questionType": "Image"
+    }
+  ],
+  "getPreparedAssessment": [
+    {
+      "id": 1,
+      "projectId": 1,
+      "companyId": 1,
+      "questionId": 1,
+      "answer": "",
+      "excludeInReporting": false,
+      "attachementAvailable": false,
+      "attachementData": "",
+      "status": "I",
+      "comments": ""
+    },
+    {
+      "id": 1,
+      "projectId": 1,
+      "companyId": 1,
+      "questionId": 2,
+      "answer": "",
+      "excludeInReporting": false,
+      "attachementAvailable": false,
+      "attachementData": "",
+      "status": "I",
+      "comments": ""
+    },
+    {
+      "id": 1,
+      "projectId": 1,
+      "companyId": 1,
+      "questionId": 3,
+      "answer": "",
+      "excludeInReporting": false,
+      "attachementAvailable": false,
+      "attachementData": "",
+      "status": "I",
+      "comments": ""
+    },
+    {
+      "id": 1,
+      "projectId": 1,
+      "companyId": 1,
+      "questionId": 4,
+      "answer": "",
+      "excludeInReporting": false,
+      "attachementAvailable": false,
+      "attachementData": "",
+      "status": "I",
+      "comments": ""
+    },
+    {
+      "id": 1,
+      "projectId": 1,
+      "companyId": 1,
+      "questionId": 5,
+      "answer": "",
+      "excludeInReporting": false,
+      "attachementAvailable": false,
+      "attachementData": "",
+      "status": "I",
+      "comments": ""
     }
   ]
 }

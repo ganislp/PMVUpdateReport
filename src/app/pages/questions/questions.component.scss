@@ -1,0 +1,22 @@
+.radio-group {
+    display: inline-flex;
+    flex-direction: column;
+  }
+  
+  .radio-button {
+    margin: 5px;
+  }
+
+  .question-width{
+    flex: 0 0 70%;
+  }
+
+  button {
+    &.mat-raised-button{
+      &.m-r20{
+        margin-right: 20px;
+      }
+
+    }
+  }
+  

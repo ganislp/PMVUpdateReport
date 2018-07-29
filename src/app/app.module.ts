@@ -39,8 +39,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionsComponent } from './pages/questions/questions.component';
 import { ApiService } from './theme/services';
-import {AdminManagedService} from "./theme/services/admin-managedata.service";
-import {HttpHelperService} from "./theme/services/http-helper.service";
+import { AdminManagedService } from "./theme/services/admin-managedata.service";
+import { HttpHelperService } from "./theme/services/http-helper.service";
+import { MaterialFileUploadComponent } from './theme/components/file-input/material-file-input.component';
 
 @NgModule({
   imports: [
@@ -76,12 +77,13 @@ import {HttpHelperService} from "./theme/services/http-helper.service";
     MessagesComponent,
     UserMenuComponent,
     QuestionsComponent,
+    MaterialFileUploadComponent,
   ],
   providers: [
     AppSettings,
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
-    ApiService,AdminManagedService,HttpHelperService
+    ApiService, AdminManagedService, HttpHelperService
   ],
   bootstrap: [AppComponent]
 })

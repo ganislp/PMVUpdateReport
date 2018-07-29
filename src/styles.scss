@@ -15,8 +15,24 @@
     display: flex;
     flex-direction: row;
     flex-basis:50%;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;   
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;   
+    justify-content: flex-start;
+    align-items: center;
+
 }
 
 .p-20 {
@@ -25,6 +41,10 @@
 
 .m-b10 {
     margin-bottom: 10px;
+}
+
+.m-r20 {
+    margin-right: 20px;
 }
 
 .float-r {
