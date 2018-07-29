@@ -11,6 +11,7 @@ import { PmvHeading } from "../../theme/models/pmv-heading.model";
 import { PmvSubHeading } from "../../theme/models/pmv-subheading.model";
 import { PmvQuestion } from "../../theme/models/pmv-question.model";
 import { Response } from "../../theme/models/response.model";
+import {QuestionType} from "../../theme/models/question-type.model";
 
 
 
@@ -31,7 +32,9 @@ export class AdminComponent implements OnInit {
   selectedSubHeadingId: number = -1;
   pmvHeadings: PmvHeading[];
   pmvSubHeadings: PmvSubHeading[];
+  pmvSubHeadingsFilter: PmvSubHeading[];
   pmvQuestions: PmvQuestion[];
+  pmvQuestionsFilter: PmvQuestion[];
 
   //Mat table variables
   pmvHeadingDisplayedColumns: string[] = ['id', 'heading', 'edit'];
@@ -71,29 +74,27 @@ export class AdminComponent implements OnInit {
 
   }
 
-  getPmvSubHeadingsByHeadingId = (headingId: number): void => {
-    this.adminManagedService.getPmvSubHeadingsByHeadingId(this.selectedHeadingId).subscribe(
-      (response) => {
-        response = this.pmvSubHeadings = response;
-        this.showSpinner = true;
-        this.subHeadingsDataSource = new MatTableDataSource<PmvSubHeading>(this.pmvSubHeadings);
-        this.setUpSortingAndPagination("pmvSubheadings");
-      }
-      , (error) => {
-        this.showSpinner = false;
-        console.log(error);
-      }
+  getPmvSubHeadings = (): void => {
+    this.adminManagedService.getPmvSubHeadings().subscribe(
+        (response) => {
+          response = this.pmvSubHeadings = response;
+
+        }
+        , (error) => {
+          this.showSpinner = false;
+          console.log(error);
+        }
     );
 
   }
 
-  getQuestionsByHeadingIdAndSubHeadingId = (headingId: number, subheadingId: number): void => {
-    this.adminManagedService.getQuestionsByHeadingIdAndSubHeadingId(this.selectedHeadingId, this.selectedSubHeadingId).subscribe(
+
+
+  getQuestions = (): void => {
+    this.adminManagedService.getQuestions().subscribe(
       (response) => {
         response = this.pmvQuestions = response;
-        this.showSpinner = true;
-        this.pmvQuestionsDataSource = new MatTableDataSource<PmvQuestion>(this.pmvQuestions);
-        this.setUpSortingAndPagination("pmvQuestions");
+
       }
       , (error) => {
         this.showSpinner = false;
@@ -112,13 +113,17 @@ export class AdminComponent implements OnInit {
       this.selectedSubHeadingId = row.id;
     }
     if (this.selectedHeadingId > 0 && this.selectedSubHeadingId > 0) {
-      this.getQuestionsByHeadingIdAndSubHeadingId(this.selectedHeadingId, this.selectedSubHeadingId);
+     this.pmvQuestionsFilter = this.pmvQuestions.filter(x => x.headingId === this.selectedHeadingId && x.subheadingId === this.selectedSubHeadingId)
       this.showSpinner = true;
+      this.pmvQuestionsDataSource = new MatTableDataSource<PmvQuestion>(this.pmvQuestionsFilter);
+      this.setUpSortingAndPagination("pmvQuestions");
 
     }
     if (this.selectedHeadingId >= 0 && this.selectedSubHeadingId < 0) {
-      this.getPmvSubHeadingsByHeadingId(this.selectedHeadingId);
+      this.pmvSubHeadingsFilter =  this.pmvSubHeadings.filter(x => x.headingId === this.selectedHeadingId)
       this.showSpinner = true;
+      this.subHeadingsDataSource = new MatTableDataSource<PmvSubHeading>(this.pmvSubHeadingsFilter);
+      this.setUpSortingAndPagination("pmvSubheadings");
     }
     /* else if(tableName == "pmvQuestions") {
        this.selectedSubHeadingId = row.id;
@@ -255,8 +260,8 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.showSpinner = true;
     this.getPmvHeadings();
-
-
+     this.getPmvSubHeadings();
+     this.getQuestions();
     /*this.subscriptions.push(this.adminManagedService.getPmvHeadings().subscribe((response) => {
       this.pmvHeadings = response;
       this.showSpinner = false;
@@ -277,7 +282,7 @@ export class AdminComponent implements OnInit {
 
 
 
-  public openAddEditItemDialog(itemType: ItemTypes, item: Item | PmvQuestion | PmvHeading | PmvSubHeading) {
+  public openAddEditItemDialog(itemType: ItemTypes, item: Item | PmvQuestion | PmvHeading | PmvSubHeading ) {
 
     let dialogRef = this.dialog.open(AddItemComponent, {
       data: { itemType: itemType, item: item }
@@ -373,8 +378,8 @@ export class AdminComponent implements OnInit {
 
     else if (itemType == ItemTypes.questions) {
       item.id = Math.round(Math.floor(Math.random() * (1000 - 100 + 1)) + 100);
-      (<PmvQuestion>item).headingId = this.selectedHeadingId;
-      (<PmvQuestion>item).subheadingId = this.selectedSubHeadingId;
+    (<PmvQuestion>item).headingId = this.selectedHeadingId;
+    (<PmvQuestion>item).subheadingId = this.selectedSubHeadingId;
       this.addPmvQuestion(<PmvQuestion>item);
       this.setUpSortingAndPagination("pmvQuestions");
       this.openSnackBar('Question added Successfully!!!', '');

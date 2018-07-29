@@ -47,6 +47,11 @@ export class AdminManagedService {
         return this.httpHelper.getDataWithoutAuthentication<PmvQuestion[]>('getQuestions' + "?" + "headingId=" + headingId + "&" + "subheadingId=" + subHeadingId);
     }
 
+    getQuestions = (): Observable<PmvQuestion[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<PmvQuestion[]>('getQuestions');
+    }
+
+
     updatePmvQuestion = (request: PmvQuestion): Observable<Response> => {
         return this.httpHelper.putDataWithoutAuthentication<Response>('getQuestions/' + request.id, request);
     }

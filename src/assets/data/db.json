@@ -42,7 +42,7 @@
     },
     {
       "id": 6,
-      "heading": "INVESTMENT STRUCTURE"
+      "heading": "INVESTMENT STRUCTURE 123"
     },
     {
       "id": 7,
@@ -79,6 +79,10 @@
     {
       "heading": "15th one saving ",
       "id": 15
+    },
+    {
+      "heading": "123456777777",
+      "id": 16
     }
   ],
   "getPmvSubHeadings": [
@@ -113,7 +117,7 @@
       "headingId": 6
     },
     {
-      "subHeading": "Financial",
+      "subHeading": "Financial 123",
       "id": 7,
       "headingId": 7
     },
@@ -176,6 +180,11 @@
       "subHeading": "Environmental , Social and Governance considerations",
       "id": 19,
       "headingId": 8
+    },
+    {
+      "subHeading": "1233333333333333",
+      "id": 903,
+      "headingId": 7
     }
   ],
   "getQuestions": [
@@ -183,40 +192,28 @@
       "id": 1,
       "headingId": 7,
       "subheadingId": 7,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionTypeId": "Text",
       "question": "Obtain signed audited AFS for the period under review and recent management accounts?"
     },
     {
       "id": 2,
       "headingId": 7,
       "subheadingId": 7,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Review the reports included in the AFS, auditor’s and directors’ reports and accounting policies notes to AFS and identify and follow up any key issues/qualifications?"
     },
     {
       "id": 3,
       "headingId": 7,
       "subheadingId": 7,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Analyze financials (trend analysis, key ratios and performance against best case budgets) and follow up on significant movements,?"
     },
     {
       "id": 4,
       "headingId": 7,
       "subheadingId": 7,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Obtain reasons for deviations (where actual performance differs significantly from best case budgets )"
     },
     {
@@ -233,270 +230,189 @@
       "id": 6,
       "headingId": 7,
       "subheadingId": 7,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Review debtors age analysis and if there is deterioration in debtors level/ days, enquire with management for reasons (and action plans)"
     },
     {
       "id": 7,
       "headingId": 7,
       "subheadingId": 7,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Review age analysis of creditors against credit terms and obtain reasons for extended creditors days and impact on the business"
     },
     {
       "id": 8,
       "headingId": 7,
       "subheadingId": 7,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Review key financial risks (e.g. liquidity/ cash flow, credit, foreign exchange, pricing, investment risk etc.) facing the company and obtain explanation on how risks are managed/ mitigated"
     },
     {
       "id": 9,
       "headingId": 7,
       "subheadingId": 7,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Assess funding needs (working capital, capex etc.)"
     },
     {
       "id": 10,
       "headingId": 7,
       "subheadingId": 8,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "For debt, check if company is in arrears and why through consultation with finance and legal agreements."
     },
     {
       "id": 11,
       "headingId": 7,
       "subheadingId": 8,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "For equity, enquire with management on the dividend policy (and check the shareholders agreement to confirm), and ascertain whether the company is in a position to distribute cash to shareholders"
     },
     {
       "id": 12,
       "headingId": 7,
       "subheadingId": 8,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Check if company has declared dividends (for SPVs, also check underlying operating companies) and confirm that PIC has received dividend due."
     },
     {
       "id": 13,
       "headingId": 7,
       "subheadingId": 8,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "For redeemable quasi-equity instruments, ascertain whether instrument is redeemable within the next 12 months, and assess whether company will be in a position to redeem obligation."
     },
     {
       "id": 14,
       "headingId": 7,
       "subheadingId": 9,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Make a list of all the conditions precedence to a drawdown"
     },
     {
       "id": 15,
       "headingId": 7,
       "subheadingId": 9,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Check that all the conditions have been met and record the progress of all undertakings in relation to agreed time frames."
     },
     {
       "id": 16,
       "headingId": 7,
       "subheadingId": 9,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Check the current solvency and liquidity using the most recent management accounts."
     },
     {
       "id": 17,
       "headingId": 7,
       "subheadingId": 9,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Monitor the classification  and use of funds and compare with drawdown approved purpose"
     },
     {
       "id": 18,
       "headingId": 7,
       "subheadingId": 10,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Within 8 weeks of the drawdown date, the Associate will verify the use of the drawn funds (as stated on the utilization and in the agreements) against the management accounts and/or bank statements."
     },
     {
       "id": 19,
       "headingId": 7,
       "subheadingId": 10,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "If necessary, the associate will have to physically verify the assets against the utilization notice or invoices provided at draw down."
     },
     {
       "id": 20,
       "headingId": 7,
       "subheadingId": 10,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Prepare an application of funds report to be signed by the Portfolio Manager and the Associate. This report is to be kept for internal purposes, but might have to be made available to other stakeholders if the need arises."
     },
     {
       "id": 21,
       "headingId": 7,
       "subheadingId": 10,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "If it is found the funds were not used in accordance to the utilization notice and/or the agreements, the FP and Legal have to be informed and the breach processes be invoked (as per the DOA)."
     },
     {
       "id": 22,
       "headingId": 7,
       "subheadingId": 11,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Peruse the loan agreements and list all undertakings"
     },
     {
       "id": 23,
       "headingId": 7,
       "subheadingId": 11,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "For the period under review note if there are any breaches of restrictive conditions and financial covenants"
     },
     {
       "id": 24,
       "headingId": 7,
       "subheadingId": 11,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Ascertain whether company is complying to loan conditions with regard to borrowings"
     },
     {
       "id": 25,
       "headingId": 7,
       "subheadingId": 11,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Obtain amount of borrowings, their terms and security and implications on the business (Letter of Bank Facilities)"
     },
     {
       "id": 26,
       "headingId": 7,
       "subheadingId": 11,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Compare actual borrowings to budgets and note if there are any breaches"
     },
     {
       "id": 27,
       "headingId": 7,
       "subheadingId": 12,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Verify breach/default with the signed Legal agreements"
     },
     {
       "id": 28,
       "headingId": 7,
       "subheadingId": 12,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Consult Deal team that initiated the transaction"
     },
     {
       "id": 29,
       "headingId": 7,
       "subheadingId": 12,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Consult Finance"
     },
     {
       "id": 30,
       "headingId": 7,
       "subheadingId": 12,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Consult Legal advisor"
     },
     {
       "id": 31,
       "headingId": 7,
       "subheadingId": 12,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": " PVM associate to have an informal communication with investee company on the matter"
     },
     {
       "id": 32,
       "headingId": 7,
       "subheadingId": 12,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Send email request for legal to prepare letter of default/breach"
     },
     {
@@ -513,455 +429,343 @@
       "id": 34,
       "headingId": 7,
       "subheadingId": 12,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "PMV associate to send out letter to investee company"
     },
     {
       "id": 35,
       "headingId": 7,
       "subheadingId": 12,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "PMV associate to monitor the default remedy process"
     },
     {
       "id": 36,
       "headingId": 7,
       "subheadingId": 13,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Obtain an extract of Fixed Assets Register ensuring that it is maintained and updated on a regular basis"
     },
     {
       "id": 37,
       "headingId": 7,
       "subheadingId": 13,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Check existence of and condition of funded assets as well as other assets and their capacities."
     },
     {
       "id": 38,
       "headingId": 7,
       "subheadingId": 13,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Establish whether there’s a need for replacement of assets (technological obsolescence) or if there’s a need for expansion and how these will be funded"
     },
     {
       "id": 39,
       "headingId": 8,
       "subheadingId": 14,
-      "questionType": {
-        "id": 2,
-        "questionType": "Attachment"
-      },
+      "questionType": "Text",
       "question": "Extract a listing of all the security prescribed for the investment"
     },
     {
       "id": 40,
       "headingId": 8,
       "subheadingId": 14,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Make an assessment on whether the security is still covering the investment liability"
     },
     {
       "id": 41,
       "headingId": 8,
       "subheadingId": 15,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Request list of key customers and the percentage of turnover is attributable to them?"
     },
     {
       "id": 42,
       "headingId": 8,
       "subheadingId": 15,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Ascertain if there is over-reliance/ concentration on a few customers and if so, enquire how the risk is managed/ mitigated"
     },
     {
       "id": 43,
       "headingId": 8,
       "subheadingId": 15,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Ascertain if the investee company lost or gained any key customers, within the past 12 months and why?"
     },
     {
       "id": 44,
       "headingId": 8,
       "subheadingId": 15,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "List the investee company key competitors"
     },
     {
       "id": 45,
       "headingId": 8,
       "subheadingId": 15,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Evaluate whether there have been significant changes in trading conditions within the industry in which investee company operates."
     },
     {
       "id": 46,
       "headingId": 8,
       "subheadingId": 15,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Enquire from management and corroborate position in market place and ascertain if investee company lost or gained market share in the past 12 months and why."
     },
     {
       "id": 47,
       "headingId": 8,
       "subheadingId": 15,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Assess the impact of market changes on the business"
     },
     {
       "id": 48,
       "headingId": 8,
       "subheadingId": 15,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Attachment",
       "question": "Evaluate any possibility of synergies among investee companies within the portfolio"
     },
     {
       "id": 49,
       "headingId": 8,
       "subheadingId": 16,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Ascertain if there are any significant changes in the company’s business model subsequent to PIC approval, evaluate if it is not a breach factor and assess impact on business and PIC funding"
     },
     {
       "id": 50,
       "headingId": 8,
       "subheadingId": 16,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "List factors that affect profitability of business (pricing, unbudgeted costs, capex, operating capacity etc.)"
     },
     {
       "id": 51,
       "headingId": 8,
       "subheadingId": 16,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Ascertain factors that affect pricing and how these are managed (e.g. foreign exchange rates, commodity prices, etc.)"
     },
     {
       "id": 52,
       "headingId": 8,
       "subheadingId": 16,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Ascertain the capacity that investee company is operating at vs available capacity"
     },
     {
       "id": 53,
       "headingId": 8,
       "subheadingId": 16,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Assess If there is need for expansion, ascertain how this will be funded"
     },
     {
       "id": 54,
       "headingId": 8,
       "subheadingId": 17,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Note any change in Group structure , management and shareholders and assess implication to PIC investment "
     },
     {
       "id": 55,
       "headingId": 8,
       "subheadingId": 17,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Attachment",
       "question": "Notes changes in key management, specify the key position affected and reasons why"
     },
     {
       "id": 56,
       "headingId": 8,
       "subheadingId": 17,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Assess progress on undertakings as per PIC contract, e.g. appointment to senior management"
     },
     {
       "id": 57,
       "headingId": 8,
       "subheadingId": 17,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Assess if there is a need for non-financial business support."
     },
     {
       "id": 58,
       "headingId": 8,
       "subheadingId": 18,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Check the annual financial statements/report note in respect of contingent liabilities (including retirement obligations), off-balance sheet financing, joint ventures"
     },
     {
       "id": 59,
       "headingId": 8,
       "subheadingId": 18,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "List and assess the extent of contingent liabilities on guarantees issued / deeds of suretyship."
     },
     {
       "id": 60,
       "headingId": 8,
       "subheadingId": 18,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Enquire with management about pending litigations (e.g. labor disputes involving CCMA, cases against company etc.)"
     },
     {
       "id": 61,
       "headingId": 8,
       "subheadingId": 18,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Occupational Health and Safety"
     },
     {
       "id": 62,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Licenses / concessions (e.g. mining rights, business permits, patents etc.)"
     },
     {
       "id": 63,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Environmental audit"
     },
     {
       "id": 64,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Corporate governance"
     },
     {
       "id": 65,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Number of Board Members"
     },
     {
       "id": 66,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Ratio of non-executive to executive directors"
     },
     {
       "id": 67,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Board sub-committees"
     },
     {
       "id": 68,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Have there been any changes in the auditors in the past?"
     },
     {
       "id": 69,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Is the company fulfilling its statutory obligations? (E.g. UIF, skills levy, employment equity plan, etc.)"
     },
     {
       "id": 70,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Does the company keep accurate statutory records? (E.g. Share register, minutes of board meetings, declarations of interest in contracts by directors, memorandum and articles of association, CM-forms, etc.)"
     },
     {
       "id": 71,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "vii. Does the company adhere to Generally Accepted Accounting Practices?"
     },
     {
       "id": 72,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Is risk management clearly defined and implemented?"
     },
     {
       "id": 73,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Obtain most recent tax certificate (VAT, Income Tax, Employee tax etc), to ensure that the client is up-to-date with SARS"
     },
     {
       "id": 74,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Note key issues identified and or tabled at AMG and board meeting"
     },
     {
       "id": 75,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Date of last board meeting held"
     },
     {
       "id": 76,
       "headingId": 8,
       "subheadingId": 19,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "question": "Date of next board meeting to be held"
     },
     {
       "id": 77,
       "headingId": 8,
       "subheadingId": 19,
-      "question": "Date of last AGM held"
+      "question": "Date of last AGM held",
+      "questionType": "Attachment"
     },
     {
       "id": 78,
       "headingId": 8,
-      "questionType": {
-        "id": 1,
-        "questionType": "Text"
-      },
+      "questionType": "Text",
       "subheadingId": 19,
       "question": "Date of next AGM to be held"
     },
     {
       "question": "hkggkgkgghjfhfjk",
-      "questionType": {
-        "id": 2,
-        "questionType": "Attachment"
-      },
+      "questionType": "Text",
       "id": 865,
+      "headingId": 8,
+      "subheadingId": 14
+    },
+    {
+      "question": "hhhhhhhhhhhhhhh",
+      "id": 786
+    },
+    {
+      "question": "ganeshhhhhhhhhhhhhhhh",
+      "id": 424
+    },
+    {
+      "question": "vbxvbxxcczxxcX",
+      "id": 540,
+      "headingId": 8,
+      "subheadingId": 14,
+      "questionType": "Attachment"
+    },
+    {
+      "question": "ganesh12333333",
+      "questionType": "Attachment",
+      "id": 190,
       "headingId": 8,
       "subheadingId": 14
     }

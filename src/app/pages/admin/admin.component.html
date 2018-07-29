@@ -83,16 +83,14 @@
                                 <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
                             </ng-container>
 
+
                             <!-- Name Column -->
                             <ng-container matColumnDef="subHeading">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> Sub Heading </mat-header-cell>
                                 <mat-cell *matCellDef="let element"> {{element.subHeading}} </mat-cell>
                             </ng-container>
 
-                            <ng-container matColumnDef="heading">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Heading </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.heading}} </mat-cell>
-                            </ng-container>
+
                             <ng-container matColumnDef="edit">
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                                 <mat-cell *matCellDef="let group" (click)="$event.stopPropagation()">
@@ -160,7 +158,7 @@
 
                             <ng-container matColumnDef="questionType">
                                 <mat-header-cell *matHeaderCellDef  mat-sort-header> Question Type </mat-header-cell>
-                                <mat-cell *matCellDef="let element" > {{element.questionType.questionType}} </mat-cell>
+                                <mat-cell *matCellDef="let element" > {{element.questionType}} </mat-cell>
                             </ng-container>
 
 

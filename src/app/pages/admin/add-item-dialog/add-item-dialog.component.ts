@@ -20,13 +20,11 @@ export class AddItemComponent implements OnInit {
   questionTypeObj: QuestionType;
   public passwordHide: boolean = true;
   public itemType: ItemTypes;
-  public item: Item | PmvQuestion |PmvHeading | PmvSubHeading;
+  public item: Item | PmvQuestion |PmvHeading | PmvSubHeading | QuestionType;
   constructor(public dialogRef: MatDialogRef<AddItemComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public fb: FormBuilder,private adminManagedService: AdminManagedService) {
     this.form = this.fb.group({
-      /*  name: [null, Validators.compose([Validators.required, Validators.minLength(3)])],
-       question: [null, Validators.compose([Validators.required, Validators.minLength(3)])] */
     });
   }
 
@@ -51,13 +49,13 @@ export class AddItemComponent implements OnInit {
       this.itemType = this.data.itemType;
       this.item = this.data.item;
       let initialValue: string;
-      let initialValueId: number;
+      let initialQuestion: string;
       if (this.itemType == ItemTypes.questions) {
         this.getQuestionTypes();
         initialValue = (<PmvQuestion>this.item) ? (<PmvQuestion>this.item).question : null;
-        initialValueId = (<PmvQuestion>this.item) ? (<PmvQuestion>this.item).questionType.id : null;
-        this.form.addControl("question", new FormControl(initialValue, Validators.compose([Validators.required, Validators.minLength(10)])));
-        this.form.addControl("questionType", new FormControl(initialValueId, Validators.compose([Validators.required, Validators.minLength(10)])));
+        initialQuestion = (<PmvQuestion>this.item) ? (<PmvQuestion>this.item).questionType : null;
+        this.form.addControl("question", new FormControl(initialValue, Validators.compose([Validators.required])));
+        this.form.addControl("questionType", new FormControl(initialQuestion, Validators.compose([Validators.required])));
         this.form.removeControl("subHeading");
         this.form.removeControl("heading");
       }
@@ -65,8 +63,9 @@ export class AddItemComponent implements OnInit {
       else if(this.itemType == ItemTypes.headings){
 
         initialValue = (<PmvHeading>this.item) ? (<PmvHeading>this.item).heading : null;
-        this.form.addControl("heading", new FormControl(initialValue, Validators.compose([Validators.required, Validators.minLength(10)])));
+        this.form.addControl("heading", new FormControl(initialValue, Validators.compose([Validators.required])));
         this.form.removeControl("question");
+        this.form.removeControl("questionType");
         this.form.removeControl("subHeading");
 
       }
@@ -76,28 +75,11 @@ export class AddItemComponent implements OnInit {
         initialValue = (<PmvSubHeading>this.item) ? (<PmvSubHeading>this.item).subHeading : null;
         this.form.addControl("subHeading", new FormControl(initialValue, Validators.compose([Validators.required, Validators.minLength(10)])));
         this.form.removeControl("question");
+        this.form.removeControl("questionType");
         this.form.removeControl("heading");
 
       }
 
-  /* if (this.itemType == ItemTypes.headings) {
-        initialValue = (<PmvHeading>this.item) ? (<PmvHeading>this.item).heading : null;
-        this.form.addControl("heading", new FormControl(initialValue, Validators.compose([Validators.required, Validators.minLength(10)])));
-        this.form.removeControl("name");
-      }*/
-
-     /* else if (this.itemType == ItemTypes.subheadings) {
-        initialValue = (<PmvSubHeading>this.item) ? (<PmvSubHeading>this.item).subHeading : null;
-        this.form.addControl("subHeading", new FormControl(initialValue, Validators.compose([Validators.required, Validators.minLength(10)])));
-        this.form.removeControl("name");
-      }
-
-
-      else {
-        initialValue = (<Item>this.item) ? (<Item>this.item).name : null
-        this.form.addControl("name", new FormControl(initialValue, Validators.compose([Validators.required, Validators.minLength(3)])));
-        this.form.removeControl("question");
-      }*/
     }
   }
 
@@ -109,9 +91,8 @@ export class AddItemComponent implements OnInit {
     if (!this.item) this.item = {} as Item | PmvQuestion |PmvHeading | PmvSubHeading;
 
     if (this.itemType == ItemTypes.questions) {
-      this.questionTypeObj = this.questionTypes.find(questionType => questionType.id == this.form.value['questionType']);
       (<PmvQuestion>this.item).question = this.form.value ? this.form.value['question'] : '';
-      (<PmvQuestion>this.item).questionType = this.questionTypeObj;
+      (<PmvQuestion>this.item).questionType = this.form.value ? this.form.value['questionType'] : '';
     }
     else if(this.itemType == ItemTypes.headings){
       (<PmvHeading>this.item).heading = this.form.value ? this.form.value['heading'] : '';
