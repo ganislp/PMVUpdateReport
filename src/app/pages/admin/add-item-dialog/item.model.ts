@@ -1,6 +1,7 @@
 export class Item {
     name: string;
     id: number;
+    subId: number;
 }
 
 export class SubItem {

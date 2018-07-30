@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {DropdownModule} from 'primeng/dropdown';
 import { MatAutocompleteModule,
          MatButtonModule,
          MatButtonToggleModule,
@@ -32,6 +34,7 @@ import { MatAutocompleteModule,
          MatToolbarModule,
          MatTooltipModule,
          MatStepperModule } from '@angular/material';
+
 
 @NgModule({
   imports: [
@@ -67,7 +70,9 @@ import { MatAutocompleteModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatStepperModule
+    MatStepperModule,
+      MultiSelectModule,
+      DropdownModule
   ],
   exports: [
     FlexLayoutModule,
@@ -101,7 +106,9 @@ import { MatAutocompleteModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatStepperModule
+    MatStepperModule,
+      MultiSelectModule,
+      DropdownModule
   ],
   declarations: []
 })

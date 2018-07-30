@@ -35,6 +35,7 @@ export class AdminComponent implements OnInit {
   pmvSubHeadingsFilter: PmvSubHeading[];
   pmvQuestions: PmvQuestion[];
   pmvQuestionsFilter: PmvQuestion[];
+  questionTypes:QuestionType[];
 
   //Mat table variables
   pmvHeadingDisplayedColumns: string[] = ['id', 'heading', 'edit'];
@@ -88,6 +89,23 @@ export class AdminComponent implements OnInit {
 
   }
 
+
+  getQuestionTypes = (): void => {
+    this.adminManagedService.getQuestionTypes ().subscribe(
+        (response) => {
+          response = this.questionTypes = response;
+        }
+        , (error) => {
+          this.showSpinner = false;
+          console.log(error);
+        }
+    );
+
+  }
+
+  getTypeDescription = (id: number): string =>{
+    return this.questionTypes.find( item => item.id == id) ? this.questionTypes.find( item => item.id == id).questionType : '';
+  }
 
 
   getQuestions = (): void => {
@@ -262,6 +280,7 @@ export class AdminComponent implements OnInit {
     this.getPmvHeadings();
      this.getPmvSubHeadings();
      this.getQuestions();
+     this.getQuestionTypes();
     /*this.subscriptions.push(this.adminManagedService.getPmvHeadings().subscribe((response) => {
       this.pmvHeadings = response;
       this.showSpinner = false;
@@ -332,7 +351,7 @@ export class AdminComponent implements OnInit {
       this.openSnackBar('Save Successful!!!', '');    
     }*/
 
-  private addItem(itemType: ItemTypes, item: Item | PmvQuestion | PmvHeading | PmvSubHeading) {
+  private addItem(itemType: ItemTypes, item: Item | PmvQuestion | PmvHeading | PmvSubHeading |QuestionType) {
     /*if (itemType == ItemTypes.questions) {
       if (!this.questions) this.questions = [];
       item.id = this.questions.length + 1;
@@ -377,9 +396,12 @@ export class AdminComponent implements OnInit {
     }
 
     else if (itemType == ItemTypes.questions) {
+
       item.id = Math.round(Math.floor(Math.random() * (1000 - 100 + 1)) + 100);
     (<PmvQuestion>item).headingId = this.selectedHeadingId;
     (<PmvQuestion>item).subheadingId = this.selectedSubHeadingId;
+    //  (<PmvQuestion>item).questionTypeId = item.id;
+     // console.log("questionTypeId" +)
       this.addPmvQuestion(<PmvQuestion>item);
       this.setUpSortingAndPagination("pmvQuestions");
       this.openSnackBar('Question added Successfully!!!', '');

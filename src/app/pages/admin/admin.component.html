@@ -158,7 +158,7 @@
 
                             <ng-container matColumnDef="questionType">
                                 <mat-header-cell *matHeaderCellDef  mat-sort-header> Question Type </mat-header-cell>
-                                <mat-cell *matCellDef="let element" > {{element.questionType}} </mat-cell>
+                                <mat-cell *matCellDef="let element" > {{getTypeDescription(element.questionTypeId)}} </mat-cell>
                             </ng-container>
 
 

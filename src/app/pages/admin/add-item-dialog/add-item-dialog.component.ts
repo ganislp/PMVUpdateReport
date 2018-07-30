@@ -49,13 +49,13 @@ export class AddItemComponent implements OnInit {
       this.itemType = this.data.itemType;
       this.item = this.data.item;
       let initialValue: string;
-      let initialQuestion: string;
+      let initialValuequestionType: number;
       if (this.itemType == ItemTypes.questions) {
         this.getQuestionTypes();
+        initialValuequestionType = (<PmvQuestion>this.item)? (<PmvQuestion>this.item).questionTypeId : null;
         initialValue = (<PmvQuestion>this.item) ? (<PmvQuestion>this.item).question : null;
-        initialQuestion = (<PmvQuestion>this.item) ? (<PmvQuestion>this.item).questionType : null;
         this.form.addControl("question", new FormControl(initialValue, Validators.compose([Validators.required])));
-        this.form.addControl("questionType", new FormControl(initialQuestion, Validators.compose([Validators.required])));
+        this.form.addControl("questionType", new FormControl(initialValuequestionType, Validators.compose([Validators.required])));
         this.form.removeControl("subHeading");
         this.form.removeControl("heading");
       }
@@ -88,11 +88,11 @@ export class AddItemComponent implements OnInit {
   }
 
   save(): void {
-    if (!this.item) this.item = {} as Item | PmvQuestion |PmvHeading | PmvSubHeading;
+    if (!this.item) this.item = {} as Item | PmvQuestion |PmvHeading | PmvSubHeading |QuestionType;
 
     if (this.itemType == ItemTypes.questions) {
       (<PmvQuestion>this.item).question = this.form.value ? this.form.value['question'] : '';
-      (<PmvQuestion>this.item).questionType = this.form.value ? this.form.value['questionType'] : '';
+      (<PmvQuestion>this.item).questionTypeId = this.form.value ? this.form.value['questionType'] : '';
     }
     else if(this.itemType == ItemTypes.headings){
       (<PmvHeading>this.item).heading = this.form.value ? this.form.value['heading'] : '';

@@ -13,6 +13,7 @@ import { CompanyType } from "../models/company-type.model";
 import { Client } from "../models/client.model";
 import { QuestionType } from "../models/question-type.model";
 import { AssessmentItem } from "../models/assessment.model";
+import {MasterAssignment} from "../models/master-assignment.model";
 
 
 
@@ -65,6 +66,7 @@ export class AdminManagedService {
     }
 
 
+
     updatePmvHeading = (request: PmvHeading): Observable<Response> => {
         return this.httpHelper.putDataWithoutAuthentication<Response>('getPmvHeadings/' + request.id, request);
     }
@@ -86,8 +88,12 @@ export class AdminManagedService {
         return this.httpHelper.getDataWithoutAuthentication<Project[]>('getProjects');
     }
 
-    getCompanies = (projectId: number): Observable<Company[]> => {
+    getCompaniesByProjectId = (projectId: number): Observable<Company[]> => {
         return this.httpHelper.getDataWithoutAuthentication<Company[]>('getCompanies' + "?" + "projectId=" + projectId);
+    }
+
+    getCompanies = (): Observable<Company[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<Company[]>('getCompanies');
     }
 
     getCompanyTypes = (): Observable<CompanyType[]> => {
@@ -96,5 +102,9 @@ export class AdminManagedService {
 
     getClients = (): Observable<Client[]> => {
         return this.httpHelper.getDataWithoutAuthentication<Client[]>('getClients');
+    }
+
+    getMasterAssignment = (): Observable<MasterAssignment[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<MasterAssignment[]>('getMasterAssignment');
     }
 }

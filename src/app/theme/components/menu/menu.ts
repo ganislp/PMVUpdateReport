@@ -4,8 +4,8 @@ export const verticalMenuItems = [
     new Menu (1, 'Dashboard', '/', null, 'dashboard', null, false, 0),
     new Menu(2, 'Master Data Management', '/', null, 'settings_applications', null, true, 0),
     new Menu (3, 'PMV Master Data ', '/admin', null, 'equalizer', null, false, 2),
-    new Menu(4, 'Assessment', '/assessment', null, 'business', null, false, 0)
-
+    new Menu (4, 'PMV Create Financial Assignment', '/admin/create-financial-assignment', null, 'equalizer', null, false, 2),
+    new Menu(5, 'Assessment', '/assessment', null, 'business', null, false, 0)
  /*    new Menu (2, 'Users', '/users', null, 'supervisor_account', null, false, 0),
      new Menu (3, 'UI Features', null, null, 'computer', null, true, 0),   
      new Menu (4, 'Buttons', '/ui/buttons', null, 'keyboard', null, false, 3),  
@@ -67,7 +67,8 @@ export const horizontalMenuItems = [
     new Menu (1, 'Dashboard', '/', null, 'dashboard', null, false, 0),
     new Menu(2, 'Master Data Management', '/', null, 'settings_applications', null, true, 0),
     new Menu (3, 'PMV Master Data ', '/admin', null, 'equalizer', null, false, 2),
-    new Menu(4, 'Assessment', '/assessment', null, 'business', null, false, 0)
+    new Menu (4, 'PMV Create Financial Assignment', '/admin/create-financial-assignment', null, 'equalizer', null, false, 2),
+    new Menu(5, 'Assessment', '/assessment', null, 'business', null, false, 0)
     /* new Menu (1, 'Dashboard', '/', null, 'dashboard', null, false, 0),
     new Menu (2, 'Users', '/users', null, 'supervisor_account', null, false, 0), 
     new Menu (3, 'UI Features', null, null, 'computer', null, true, 0),   

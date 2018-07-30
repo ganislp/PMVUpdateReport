@@ -18,7 +18,7 @@
 
                     <mat-form-field *ngIf="itemType == 3">
                         <mat-select placeholder="Question Type" formControlName="questionType" >
-                            <mat-option *ngFor="let questionType of questionTypes" [value]="questionType.questionType">
+                            <mat-option *ngFor="let questionType of questionTypes" [value]="questionType.id">
                                 {{questionType.questionType}}
                             </mat-option>
                         </mat-select>
