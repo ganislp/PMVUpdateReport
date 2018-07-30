@@ -86,7 +86,7 @@ export class QuestionsComponent implements OnInit {
           ? this.questions.find(q => q.id == item.questionId) : null;
         if (question) {
           item.question = question.question;
-          item.questionType = question.questionType.questionType;
+          item.questionType = question.questionTypeId;
         }
         item.status = (item.status == 'I' || item.status == 'S') ? 'A' : item.status;
       });

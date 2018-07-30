@@ -10,5 +10,5 @@ export class AssessmentItem {
     status: string;
     comments: string;
     question: string;
-    questionType: string;
+    questionType: number;
 }

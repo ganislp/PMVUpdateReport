@@ -813,7 +813,7 @@
       "fiscalYear": "2018",
       "fiscalYearName": "2018-2019",
       "quarter": "2",
-      "status": "F"
+      "status": "T"
     },
     {
       "id": 3,
@@ -822,7 +822,7 @@
       "fiscalYear": "2018",
       "fiscalYearName": "2018-2019",
       "quarter": "3",
-      "status": "F"
+      "status": "T"
     },
     {
       "id": 4,

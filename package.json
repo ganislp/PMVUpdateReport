@@ -34,6 +34,7 @@
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.3",
     "date-fns": "1.29.0",
+    "font-awesome": "^4.7.0",
     "hammerjs": "2.0.8",
     "leaflet-map": "0.2.1",
     "ng2-dragula": "1.5.0",

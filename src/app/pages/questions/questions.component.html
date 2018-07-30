@@ -56,7 +56,7 @@
           <mat-tab  *ngIf="subheading.subHeading == 'Financial'" [label]="subheading.subHeading">
             <div fxLayout="column" class="form-field-outer p-20">
               <ng-container *ngFor="let item of subheading.assessmentItems">
-                <div *ngIf="item.questionType == 'Text'" class="flex-row">
+                <div *ngIf="item.questionType == 1" class="flex-row">
                   <mat-form-field class="w-100 m-b10 question-width">
                     <textarea matInput [placeholder]="item.question" [(ngModel)]="item.answer"></textarea>
                   </mat-form-field>
@@ -66,7 +66,7 @@
                     <mat-radio-button [value]="'R'">Reject</mat-radio-button>
                   </mat-radio-group>
                 </div>
-                <div *ngIf="item.questionType == 'attachment'" class="flex-row">
+                <div *ngIf="item.questionType == 2" class="flex-row">
                   <div class="w-100 m-b10 question-width">
                     <label>{{item.question}}</label>
                     <div class="p-20">

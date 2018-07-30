@@ -2,72 +2,48 @@
   <mat-card>
     <mat-card-header class="text-cente">
       <mat-card-title>
-        <h2>Deal Assessment</h2>
+        <h2>Generate Assessment</h2>
       </mat-card-title>
       <mat-card-subtitle>
-        <p>Please select a deal, assessment year and quarter to start the assessment</p>
+        <p>Please select one or more companies to generate an Assessment</p>
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <div class="flex-row-container p-20">
-
-      <form [formGroup]="selectionForm" class="user-form" >
-
-        <mat-form-field class="select-form">
-          <mat-select
-                  placeholder="Company Name"
-                  name="Company"
-                  class="filter-select"
-                  formControlName="selectedCompanies"
-                  [compareWith]="equals"
-                  multiple
-                  >
-            <mat-option
-                    disabled="disabled"
-                    class="filter-option">
-              <button
-                      mat-raised-button
-                      class="mat-primary fill text-sm"
-                      (click)="selectAll(selectionForm.controls['selectedCompanies'].value, companies)">
-                Select All
-              </button>
-              <button
-                      mat-raised-button
-                      class="mat-accent fill text-sm"
-                      (click)="deselectAll(selectionForm.controls['selectedCompanies'].value)">
-                Deselect All
-              </button>
-            </mat-option>
-            <mat-option *ngFor="let company of companies" [value]="company">
-              {{company.companyName}} ({{company.companyType}})
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-
-        <mat-form-field class="w-100">
-          <mat-placeholder>Financial Assignment Year</mat-placeholder>
-          <input matInput formControlName="selectedYear" readonly>
-          <mat-error *ngIf="selectionForm.controls['selectedYear'].errors?.required">Heading is required</mat-error>
-          <mat-error *ngIf="selectionForm.controls['selectedYear'].hasError('minlength')">Heading isn't long enough, minimum of 6 characters</mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="w-100">
-          <mat-placeholder>Financial Assignment Quarter</mat-placeholder>
-          <input matInput formControlName="selectedQuarter" readonly>
-          <mat-error *ngIf="selectionForm.controls['selectedQuarter'].errors?.required">Heading is required</mat-error>
-          <mat-error *ngIf="selectionForm.controls['selectedQuarter'].hasError('minlength')">Heading isn't long enough, minimum of 6 characters</mat-error>
-        </mat-form-field>
-
-      </form>
+        <form [formGroup]="selectionForm" class="user-form">
+          <mat-form-field class="select-form w-100">
+            <mat-select placeholder="Company Name" name="Company" class="filter-select" formControlName="selectedCompanies" [compareWith]="equals"
+              multiple>
+              <mat-option disabled="disabled" class="filter-option">
+                <button mat-raised-button class="mat-primary fill text-sm" (click)="selectAll(selectionForm.controls['selectedCompanies'], companies)">
+                  Select All
+                </button>
+                <button mat-raised-button class="mat-accent fill text-sm" (click)="deselectAll(selectionForm.controls['selectedCompanies'])">
+                  Deselect All
+                </button>
+              </mat-option>
+              <mat-option *ngFor="let company of companies" [value]="company">
+                {{company.companyName}} ({{company.companyType}})
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-placeholder>Financial Assignment Year</mat-placeholder>
+            <input matInput formControlName="selectedYear" readonly>
+            <!--  <mat-error *ngIf="selectionForm.controls['selectedYear'].errors?.required">Heading is required</mat-error>
+            <mat-error *ngIf="selectionForm.controls['selectedYear'].hasError('minlength')">Heading isn't long enough, minimum of 6 characters</mat-error> -->
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-placeholder>Financial Assignment Quarter</mat-placeholder>
+            <input matInput formControlName="selectedQuarter" readonly>
+            <!-- <mat-error *ngIf="selectionForm.controls['selectedQuarter'].errors?.required">Heading is required</mat-error>
+            <mat-error *ngIf="selectionForm.controls['selectedQuarter'].hasError('minlength')">Heading isn't long enough, minimum of 6 characters</mat-error> -->
+          </mat-form-field>
+        </form>
       </div>
     </mat-card-content>
-
   </mat-card>
-
 </div>
-
-<div  fxLayout="row" fxLayoutAlign="space-between center">
-
-  <button mat-raised-button color="warn" [disabled]="!selectionForm.valid" (click)="save()">save</button>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <button mat-raised-button color="warn" [disabled]="!selectionForm.valid" (click)="save()">Save</button>
 </div>
