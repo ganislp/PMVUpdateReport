@@ -24,7 +24,7 @@ export class CreateFinancialAssignmentComponent implements OnInit, OnDestroy {
     showSpinner: boolean;
     masterAssignments: MasterAssignment[];
     masterAssignment: MasterAssignment = new MasterAssignment();
-    masterCompanyAssignmentDisplayedColumns: string[] = ['id','companyName','companyType','completed','review','approved'];
+    masterCompanyAssignmentDisplayedColumns: string[] = ['id','companyName','companyType','completed','review','rejected','approved'];
     masterAssignmentDisplayedColumns: string[] = ['id','fiscalYear','quarter','statusTypeId'];
     masterCompanyAssignmentDataSource: MatTableDataSource<MasterCompanyAssignment>;
     masterAssignmentDataSource: MatTableDataSource<MasterAssignment>;
@@ -97,45 +97,46 @@ export class CreateFinancialAssignmentComponent implements OnInit, OnDestroy {
     }
 
     getMasterCompanyAssignmentsProgress():number{
-        let totalCompanies = this.masterCompanyAssignments.length;
-        let totalCompaniesCompleted = this.masterCompanyAssignments.filter((item => item.statusTypeId == 3)).length;
-        let percentageCompleted = totalCompaniesCompleted / totalCompanies * 100;
-     return Math.round(percentageCompleted);
+        let totalCompanies = (this.masterCompanyAssignments) ? this.masterCompanyAssignments.length :0;
+        let totalCompaniesProgress = (this.masterCompanyAssignments) ? this.masterCompanyAssignments.filter((item => item.statusTypeId == 3)).length : 0;
+        let percentageProgress = totalCompaniesProgress / totalCompanies * 100;
+     return Math.round(percentageProgress);
     }
 
-    getPmvFinancialAssignmentIncomplete(id:number):number{
+  /*  getPmvFinancialAssignmentIncomplete(id:number):number{
         let totalQuestions = this.pmvQuestions.length;
         let totalCompaniesCompleted = this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 1)).length;
         let percentageCompleted = totalCompaniesCompleted / totalQuestions * 100;
         return Math.round(percentageCompleted);
     }
-
+*/
     getPmvFinancialAssignmentCompleted(id:number):number{
-        let totalQuestions = this.pmvQuestions.length;
-        let totalCompaniesCompleted = this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 2)).length;
+        let totalQuestions = (this.pmvQuestions) ? this.pmvQuestions.length :0;
+        let totalCompaniesCompleted = (this.pmvFinancialAssignment) ? this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 2)).length : 0;
         let percentageCompleted = totalCompaniesCompleted / totalQuestions * 100;
         return Math.round(percentageCompleted);
     }
 
     getPmvFinancialAssignmentReview(id:number):number{
-        let totalQuestions = this.pmvQuestions.length;
-        let totalCompaniesCompleted = this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 3)).length;
-        let percentageCompleted = totalCompaniesCompleted / totalQuestions * 100;
-        return Math.round(percentageCompleted);
+        let totalQuestions = (this.pmvQuestions) ? this.pmvQuestions.length :0;
+        let totalCompaniesReview = (this.pmvFinancialAssignment) ? this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 3)).length : 0;
+        let percentageReview = totalCompaniesReview / totalQuestions * 100;
+        return Math.round(percentageReview);
     }
 
     getPmvFinancialAssignmentApproved(id:number):number{
-        let totalQuestions = this.pmvQuestions.length;
-        let totalCompaniesCompleted = this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 4)).length;
-        let percentageCompleted = totalCompaniesCompleted / totalQuestions * 100;
-        return Math.round(percentageCompleted);
+        let totalQuestions = (this.pmvQuestions) ? this.pmvQuestions.length :0;
+        let totalCompaniesApproved = (this.pmvFinancialAssignment) ? this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 4)).length : 0;
+        let percentageApproved = totalCompaniesApproved / totalQuestions * 100;
+
+        return Math.round(percentageApproved);
     }
 
     getPmvFinancialAssignmentRejected(id:number):number{
-        let totalQuestions = this.pmvQuestions.length;
-        let totalCompaniesCompleted = this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 5)).length;
-        let percentageCompleted = totalCompaniesCompleted / totalQuestions * 100;
-        return Math.round(percentageCompleted);
+        let totalQuestions = (this.pmvQuestions) ? this.pmvQuestions.length :0;
+        let totalCompaniesRejected = (this.pmvFinancialAssignment) ? this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 5)).length : 0;
+        let percentageRejected = totalCompaniesRejected / totalQuestions * 100;
+        return Math.round(percentageRejected);
     }
 
 

@@ -4,5 +4,4 @@ export class PmvFinancialAssignment {
     pmvQuestionId:number;
     answerStatusTypeId:number;
     answer:string;
-    status:string;
 }
