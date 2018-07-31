@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {DropdownModule} from 'primeng/dropdown';
+import {ProgressBarModule} from "angular-progress-bar"
 import { MatAutocompleteModule,
          MatButtonModule,
          MatButtonToggleModule,
@@ -72,7 +73,8 @@ import { MatAutocompleteModule,
     MatTooltipModule,
     MatStepperModule,
       MultiSelectModule,
-      DropdownModule
+      DropdownModule,
+      ProgressBarModule
   ],
   exports: [
     FlexLayoutModule,
@@ -108,7 +110,8 @@ import { MatAutocompleteModule,
     MatTooltipModule,
     MatStepperModule,
       MultiSelectModule,
-      DropdownModule
+      DropdownModule,
+      ProgressBarModule
   ],
   declarations: []
 })

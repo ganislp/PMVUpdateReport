@@ -5,5 +5,5 @@ export class MasterAssignment {
     fiscalYear: string;
     fiscalYearName: string;
     quarter: number;
-    status: string;
+    statusTypeId:number;
 }

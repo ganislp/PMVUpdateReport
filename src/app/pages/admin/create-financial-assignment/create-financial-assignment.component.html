@@ -1,15 +1,15 @@
-<div class="flex-p">
+<div class="flex-p" >
   <mat-card>
     <mat-card-header class="text-cente">
       <mat-card-title>
-        <h2>Generate Assessment</h2>
+        <h2>Generate PMV Financial Assessment</h2>
       </mat-card-title>
       <mat-card-subtitle>
-        <p>Please select one or more companies to generate an Assessment</p>
+        <p>Please select one or more companies to generate an PMV Financial Assessment</p>
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <div class="flex-row-container p-20">
+      <div class="flex-row-container p-20"  >
         <form [formGroup]="selectionForm" class="user-form">
           <mat-form-field class="select-form w-100">
             <mat-select placeholder="Company Name" name="Company" class="filter-select" formControlName="selectedCompanies" [compareWith]="equals"
@@ -40,10 +40,158 @@
             <mat-error *ngIf="selectionForm.controls['selectedQuarter'].hasError('minlength')">Heading isn't long enough, minimum of 6 characters</mat-error> -->
           </mat-form-field>
         </form>
+
+
+        <div class="wide-table">
+          <h3>Financial Assignment In Progress </h3>
+          <mat-table #table [dataSource]="masterAssignmentDataSource" #masterAssignmentSort="matSort" matSort>
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef mat-sort-header="id"> ID. </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="fiscalYear">
+              <mat-header-cell *matHeaderCellDef mat-sort-header="fiscalYear"> Fiscal Year </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.fiscalYear}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="quarter">
+              <mat-header-cell *matHeaderCellDef mat-sort-header="Quarter">Quarter </mat-header-cell>
+              <mat-cell *matCellDef="let element"> Q{{element.quarter}}
+
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="statusTypeId">
+              <mat-header-cell *matHeaderCellDef mat-sort-header="statusTypeId">Progress </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <progress-bar [progress]="getMasterCompanyAssignmentsProgress()" [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
+                </progress-bar>
+              </mat-cell>
+            </ng-container>
+
+
+            <mat-header-row *matHeaderRowDef="masterAssignmentDisplayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: masterAssignmentDisplayedColumns;"></mat-row>
+          </mat-table>
+
+          <mat-paginator #masterAssignmentPaginator [pageSizeOptions]="[50, 100, 150, 200]"></mat-paginator>
+        </div>
       </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-raised-button color="warn" [disabled]="!selectionForm.valid || masterAssignment.statusTypeId == 2" (click)="save()">Save</button>
+      </div>
+
     </mat-card-content>
   </mat-card>
 </div>
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <button mat-raised-button color="warn" [disabled]="!selectionForm.valid" (click)="save()">Save</button>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="flex-p">
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Companies Financial Assignment In Progress</h2>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <p> companies financial assignment By selected Year and selected Quarter</p>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+
+        <div class="table">
+          <h3>Companies</h3>
+          <div class="add-item">
+            <mat-form-field>
+              <input matInput (keyup)="applyFilterMasterCompanyAssignment($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+           <!-- <button mat-raised-button color="primary" (click)="openAddEditItemDialog(1, null)">
+              <mat-icon>add</mat-icon>Add</button>-->
+          </div>
+
+          <div class="wide-table">
+            <mat-table #table [dataSource]="masterCompanyAssignmentDataSource" #masterCompanyAssignmentSort="matSort" matSort>
+
+              <!-- ID Column -->
+              <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header="id"> ID. </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+              </ng-container>
+
+
+              <ng-container matColumnDef="companyName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header="companyName"> Company Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{getTypeDescription(element.companyId)}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="companyType">
+                <mat-header-cell *matHeaderCellDef mat-sort-header="companyType"> CompanyType </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{getCompanyTypeDescription(element.companyId)}} </mat-cell>
+              </ng-container>
+
+
+
+              <ng-container matColumnDef="completed">
+                <mat-header-cell *matHeaderCellDef mat-sort-header="completed">Completed </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <progress-bar [progress]="getPmvFinancialAssignmentCompleted(element.id)"  [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
+                  </progress-bar>
+                </mat-cell>
+              </ng-container>
+
+
+              <ng-container matColumnDef="review">
+                <mat-header-cell *matHeaderCellDef mat-sort-header="review">Review </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <progress-bar [progress]="getPmvFinancialAssignmentReview(element.id)"  [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
+                  </progress-bar>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="rejected">
+                <mat-header-cell *matHeaderCellDef mat-sort-header="rejected">Rejected </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <progress-bar [progress]="getPmvFinancialAssignmentRejected(element.id)"  [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
+                  </progress-bar>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="approved">
+                <mat-header-cell *matHeaderCellDef mat-sort-header="approved">Approved </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <progress-bar [progress]="getPmvFinancialAssignmentApproved(element.id)"  [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
+                  </progress-bar>
+                </mat-cell>
+              </ng-container>
+
+
+              <mat-header-row *matHeaderRowDef="masterCompanyAssignmentDisplayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: masterCompanyAssignmentDisplayedColumns;"></mat-row>
+            </mat-table>
+
+            <mat-paginator #masterCompanyAssignmentPaginator [pageSizeOptions]="[50, 100, 150, 200]"></mat-paginator>
+          </div>
+        </div>
+
+
+    </mat-card-content>
+  </mat-card>
+
+
+
+
+  </div>
+

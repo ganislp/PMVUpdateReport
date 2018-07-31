@@ -14,6 +14,8 @@ import { Client } from "../models/client.model";
 import { QuestionType } from "../models/question-type.model";
 import { AssessmentItem } from "../models/assessment.model";
 import {MasterAssignment} from "../models/master-assignment.model";
+import {PmvFinancialAssignment} from "../models/pmv-financial-assignment.model";
+import {MasterCompanyAssignment} from "../models/master-company-assignment.model";
 
 
 
@@ -106,5 +108,25 @@ export class AdminManagedService {
 
     getMasterAssignment = (): Observable<MasterAssignment[]> => {
         return this.httpHelper.getDataWithoutAuthentication<MasterAssignment[]>('getMasterAssignment');
+    }
+
+    getMasterCompanyAssignment = (): Observable<MasterCompanyAssignment[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<MasterCompanyAssignment[]>('getMasterCompanyAssignment');
+    }
+
+    getPmvFinancialAssignment = (): Observable<PmvFinancialAssignment[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<PmvFinancialAssignment[]>('getFinancialAssignment');
+    }
+
+    createMasterCompanyAssignment= (request: MasterCompanyAssignment): Observable<Response> => {
+        return this.httpHelper.postDataWithoutAuthentication<Response>('getMasterCompanyAssignment', request);
+    }
+
+    createPmvFinancialAssignment = (request: PmvFinancialAssignment): Observable<Response> => {
+        return this.httpHelper.postDataWithoutAuthentication<Response>('getFinancialAssignment', request);
+    }
+
+    updateMasterAssignmentStatus = (request: MasterAssignment): Observable<Response> => {
+        return this.httpHelper.putDataWithoutAuthentication<Response>('getMasterAssignment/' + request.id, request);
     }
 }

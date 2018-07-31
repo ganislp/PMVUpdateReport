@@ -83,6 +83,10 @@
     {
       "heading": "123456777777",
       "id": 16
+    },
+    {
+      "heading": "Risk Reating",
+      "id": 17
     }
   ],
   "getPmvSubHeadings": [
@@ -185,6 +189,11 @@
       "subHeading": "1233333333333333",
       "id": 903,
       "headingId": 7
+    },
+    {
+      "subHeading": "Risk Rating",
+      "id": 820,
+      "headingId": 17
     }
   ],
   "getQuestions": [
@@ -744,6 +753,13 @@
       "id": 307,
       "headingId": 8,
       "subheadingId": 14
+    },
+    {
+      "question": "rating",
+      "questionTypeId": 2,
+      "id": 517,
+      "headingId": 17,
+      "subheadingId": 820
     }
   ],
   "getCompanyTypes": [
@@ -804,7 +820,7 @@
       "fiscalYear": "2018",
       "fiscalYearName": "2018-2019",
       "quarter": "1",
-      "status": "F"
+      "statusTypeId": 2
     },
     {
       "id": 2,
@@ -813,7 +829,7 @@
       "fiscalYear": "2018",
       "fiscalYearName": "2018-2019",
       "quarter": "2",
-      "status": "T"
+      "statusTypeId": 1
     },
     {
       "id": 3,
@@ -822,7 +838,7 @@
       "fiscalYear": "2018",
       "fiscalYearName": "2018-2019",
       "quarter": "3",
-      "status": "T"
+      "statusTypeId": 1
     },
     {
       "id": 4,
@@ -831,7 +847,7 @@
       "fiscalYear": "2018",
       "fiscalYearName": "2018-2019",
       "quarter": "4",
-      "status": "F"
+      "statusTypeId": 1
     }
   ],
   "getProjects": [
@@ -856,23 +872,1141 @@
   ],
   "getMasterCompanyAssignment": [
     {
-      "id": 1,
-      "masterAssignmentId": "1",
-      "projectId": 1,
+      "id": 842,
+      "masterAssignmentId": 1,
       "companyId": 1,
-      "status": "F"
+      "statusTypeId": 2
+    },
+    {
+      "id": 711,
+      "masterAssignmentId": 1,
+      "companyId": 2,
+      "statusTypeId": 2
     }
   ],
   "getFinancialAssignment": [
     {
-      "id": 1,
-      "companyAssignmentId": "1",
-      "questionId": 1,
-      "answer": "",
-      "answerStatusId": 1
+      "id": 585,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 1,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 503,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 2,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 817,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 3,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 880,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 4,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 199,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 5,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 185,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 6,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 443,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 7,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 885,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 8,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 889,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 9,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 632,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 10,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 573,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 11,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 999,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 12,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 317,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 13,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 477,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 14,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 147,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 15,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 358,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 16,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 356,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 17,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 484,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 18,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 504,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 19,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 630,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 20,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 978,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 21,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 400,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 22,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 630,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 23,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 521,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 24,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 296,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 25,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 350,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 26,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 511,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 27,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 789,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 28,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 504,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 29,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 134,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 30,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 877,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 31,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 304,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 32,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 273,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 33,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 487,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 34,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 524,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 35,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 136,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 36,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 943,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 37,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 322,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 38,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 437,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 39,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 170,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 40,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 186,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 41,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 890,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 42,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 967,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 43,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 722,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 44,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 739,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 45,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 660,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 46,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 696,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 47,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 757,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 48,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 523,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 49,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 961,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 50,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 437,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 51,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 940,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 52,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 933,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 53,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 334,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 54,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 647,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 55,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 574,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 56,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 575,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 57,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 891,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 58,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 464,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 59,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 501,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 60,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 389,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 61,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 476,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 62,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 459,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 63,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 401,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 64,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 750,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 65,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 741,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 66,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 199,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 67,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 672,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 68,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 575,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 69,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 400,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 70,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 466,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 71,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 469,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 72,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 853,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 73,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 133,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 74,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 116,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 75,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 488,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 76,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 953,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 77,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 507,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 78,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 711,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 405,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 994,
+      "companyAssignmentId": 842,
+      "pmvQuestionId": 307,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 465,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 1,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 791,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 2,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 906,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 3,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 385,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 4,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 677,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 5,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 511,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 6,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 984,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 7,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 608,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 8,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 449,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 9,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 132,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 10,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 790,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 11,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 545,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 12,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 560,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 13,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 561,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 14,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 272,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 15,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 390,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 16,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 505,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 17,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 856,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 18,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 112,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 19,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 829,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 20,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 995,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 21,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 880,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 22,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 720,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 23,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 872,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 24,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 873,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 25,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 797,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 26,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 101,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 27,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 333,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 28,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 332,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 29,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 779,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 30,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 487,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 31,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 486,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 32,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 584,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 33,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 831,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 34,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 828,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 35,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 212,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 36,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 584,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 37,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 755,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 38,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 389,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 39,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 511,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 40,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 792,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 41,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 612,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 42,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 451,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 43,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 134,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 44,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 740,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 45,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 801,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 46,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 212,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 47,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 274,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 48,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 113,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 49,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 334,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 50,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 411,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 51,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 681,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 52,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 719,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 53,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 532,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 54,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 127,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 55,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 156,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 56,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 894,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 57,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 899,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 58,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 858,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 59,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 677,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 60,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 441,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 61,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 331,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 62,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 612,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 63,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 447,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 64,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 102,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 65,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 120,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 66,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 886,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 67,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 983,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 68,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 201,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 69,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 139,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 70,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 246,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 71,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 338,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 72,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 621,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 73,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 622,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 74,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 655,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 75,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 180,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 76,
+      "answerStatusTypeId": 1,
+      "answer": null
+    },
+    {
+      "id": 468,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 77,
+      "answerStatusTypeId": 4,
+      "answer": null
+    },
+    {
+      "id": 804,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 78,
+      "answerStatusTypeId": 4,
+      "answer": null
+    },
+    {
+      "id": 723,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 405,
+      "answerStatusTypeId": 4,
+      "answer": null
+    },
+    {
+      "id": 936,
+      "companyAssignmentId": 711,
+      "pmvQuestionId": 307,
+      "answerStatusTypeId": 4,
+      "answer": null
     }
   ],
-  "getAnswerStatusTypes": [
+  "getAnswerStatusType": [
     {
       "id": 1,
       "answerStatus": "Incomplete"
@@ -892,6 +2026,20 @@
     {
       "id": 5,
       "answerStatus": "Rejected"
+    }
+  ],
+  "getAssignmentStatusType": [
+    {
+      "id": 1,
+      "assignmentStatus": "Incomplete"
+    },
+    {
+      "id": 2,
+      "assignmentStatus": "InProgress"
+    },
+    {
+      "id": 3,
+      "assignmentStatus": "Completed"
     }
   ],
   "getPreparedAssessment": [

@@ -1,10 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { Subscription } from "rxjs/subscription";
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
 import { AdminManagedService } from "../../../theme/services/admin-managedata.service";
 import { Company, MasterAssignment, MasterCompanyAssignment, PmvQuestion } from "../../../theme/models";
+import {Response} from "../../../theme/models/response.model";
+import {PmvFinancialAssignment} from "../../../theme/models/pmv-financial-assignment.model";
+import {MatTableDataSource, MatPaginator, MatSort} from "@angular/material";
 
 @Component({
     selector: 'app-create-financial-assignment',
@@ -15,15 +18,30 @@ export class CreateFinancialAssignmentComponent implements OnInit, OnDestroy {
     private subscription = new Subscription();
     companies: Company[];
     pmvQuestions: PmvQuestion[];
-    masterCompanyAssignment: MasterCompanyAssignment[];
+    pmvFinancialAssignment:PmvFinancialAssignment[];
+    masterCompanyAssignments: MasterCompanyAssignment[];
     selectionForm: FormGroup;
     showSpinner: boolean;
-    //selectCompanies: SelectItem[] = [];
-    //selectedCompanies: Company[];
     masterAssignments: MasterAssignment[];
     masterAssignment: MasterAssignment = new MasterAssignment();
-
+    masterCompanyAssignmentDisplayedColumns: string[] = ['id','companyName','companyType','completed','review','approved'];
+    masterAssignmentDisplayedColumns: string[] = ['id','fiscalYear','quarter','statusTypeId'];
+    masterCompanyAssignmentDataSource: MatTableDataSource<MasterCompanyAssignment>;
+    masterAssignmentDataSource: MatTableDataSource<MasterAssignment>;
+    @ViewChild('masterCompanyAssignmentPaginator') masterCompanyAssignmentPaginator: MatPaginator;
+    @ViewChild('masterCompanyAssignmentSort') masterCompanyAssignmentSort: MatSort;
+    @ViewChild('masterAssignmentPaginator') masterAssignmentPaginator: MatPaginator;
+    @ViewChild('masterAssignmentSort') masterAssignmentSort: MatSort;
     constructor(private adminManagedService: AdminManagedService, private fb: FormBuilder) { }
+
+
+    applyFilterMasterCompanyAssignment(filterValue: string) {
+        this.masterCompanyAssignmentDataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    applyFilterMasterAssignment(filterValue: string) {
+        this.masterAssignmentDataSource.filter = filterValue.trim().toLowerCase();
+    }
 
     private equals = (objOne, objTwo): boolean => {
         if (typeof objOne !== 'undefined' && typeof objTwo !== 'undefined') {
@@ -39,134 +57,183 @@ export class CreateFinancialAssignmentComponent implements OnInit, OnDestroy {
         select.setValue([]);
     }
 
-    /*     getCompanies = (): void => {
-            this.showSpinner = true;
-            this.adminManagedService.getCompanies().subscribe(
-                (response) => {
-                    this.companies = response;
-                    this.showSpinner = false;
-                }, (error) => {
-                    this.showSpinner = false;
-                    console.log(error);
-                }
-            );
-        }
-    
-        getQuestions = (): void => {
-            this.showSpinner = true;
-            this.adminManagedService.getQuestions().subscribe(
-                (response) => {
-                    this.pmvQuestions = response;
-                    this.showSpinner = false;
-                }, (error) => {
-                    this.showSpinner = false;
-                    console.log(error);
-                }
-            );
-    
-        }
-    
-        getMasterAssignment = (): void => {
-            this.showSpinner = true;
-            this.adminManagedService.getMasterAssignment().subscribe(
-                (response) => {
-                    this.masterAssignments = response.filter(x => x.status == 'F');////FILTER CONDITION
-                    // let minId = Math.min.apply(Math, this.masterAssignments.map(function (item) { return item.id; }));
-                    // this.masterAssignments = response.filter(x => x.id == minId);
-                    // this.masterAssignment = Object.assign({}, this.masterAssignments[0]);
-                    this.masterAssignment = this.masterAssignments.reduce((prev, curr) => prev.id < curr.id ? prev : curr);
-                    this.selectionForm.controls["selectedYear"].setValue(this.masterAssignment.fiscalYear);
-                    this.selectionForm.controls["selectedQuarter"].setValue(this.masterAssignment.quarter);
-                    this.showSpinner = false;
-                }, (error) => {
-                    this.showSpinner = false;
-                    console.log(error);
-                }
-            );
-        }
-     */
+    getPmvFinancialAssignment = (): void => {
+        this.adminManagedService.getPmvFinancialAssignment().subscribe(
+            (response) => {
+                response = this.pmvFinancialAssignment = response;
+            }
+            , (error) => {
+                this.showSpinner = false;
+                console.log(error);
+            }
+        );
+
+    }
+
+    getMasterCompanyAssignment = (): void => {
+        this.adminManagedService.getMasterCompanyAssignment().subscribe(
+            (response) => {
+                response = this.masterCompanyAssignments = response;
+                let body = JSON.stringify(this.masterCompanyAssignments);
+                console.log("body.........."+ body)
+                this.masterCompanyAssignmentDataSource = new MatTableDataSource<MasterCompanyAssignment>(this.masterCompanyAssignments);
+                this.masterCompanyAssignmentDataSource.paginator = this.masterCompanyAssignmentPaginator;
+                this.masterCompanyAssignmentDataSource.sort = this.masterCompanyAssignmentSort;
+            }
+            , (error) => {
+                this.showSpinner = false;
+                console.log(error);
+            }
+        );
+
+    }
+
+    getTypeDescription = (id: number): string =>{
+        return this.masterCompanyAssignments.find( item => item.companyId == id) ? this.companies.find( item => item.id == id).companyName : '';
+    }
+
+    getCompanyTypeDescription = (id: number): string =>{
+        return this.masterCompanyAssignments.find( item => item.companyId == id) ? this.companies.find( item => item.id == id).companyType : '';
+    }
+
+    getMasterCompanyAssignmentsProgress():number{
+        let totalCompanies = this.masterCompanyAssignments.length;
+        let totalCompaniesCompleted = this.masterCompanyAssignments.filter((item => item.statusTypeId == 3)).length;
+        let percentageCompleted = totalCompaniesCompleted / totalCompanies * 100;
+     return Math.round(percentageCompleted);
+    }
+
+    getPmvFinancialAssignmentIncomplete(id:number):number{
+        let totalQuestions = this.pmvQuestions.length;
+        let totalCompaniesCompleted = this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 1)).length;
+        let percentageCompleted = totalCompaniesCompleted / totalQuestions * 100;
+        return Math.round(percentageCompleted);
+    }
+
+    getPmvFinancialAssignmentCompleted(id:number):number{
+        let totalQuestions = this.pmvQuestions.length;
+        let totalCompaniesCompleted = this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 2)).length;
+        let percentageCompleted = totalCompaniesCompleted / totalQuestions * 100;
+        return Math.round(percentageCompleted);
+    }
+
+    getPmvFinancialAssignmentReview(id:number):number{
+        let totalQuestions = this.pmvQuestions.length;
+        let totalCompaniesCompleted = this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 3)).length;
+        let percentageCompleted = totalCompaniesCompleted / totalQuestions * 100;
+        return Math.round(percentageCompleted);
+    }
+
+    getPmvFinancialAssignmentApproved(id:number):number{
+        let totalQuestions = this.pmvQuestions.length;
+        let totalCompaniesCompleted = this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 4)).length;
+        let percentageCompleted = totalCompaniesCompleted / totalQuestions * 100;
+        return Math.round(percentageCompleted);
+    }
+
+    getPmvFinancialAssignmentRejected(id:number):number{
+        let totalQuestions = this.pmvQuestions.length;
+        let totalCompaniesCompleted = this.pmvFinancialAssignment.filter((item => item.companyAssignmentId == id && item.answerStatusTypeId == 5)).length;
+        let percentageCompleted = totalCompaniesCompleted / totalQuestions * 100;
+        return Math.round(percentageCompleted);
+    }
+
 
     ngOnInit() {
 
-        /*this.subscription.add(this.adminManagedService.getCompanies().subscribe((response)  => {
-              response = this.selectedCompanies = response
-          /!*let tempRoles: Company[];
-          tempRoles = response;
-          tempRoles.forEach(el => {
-            this.selectCompanies.push({
-              label: el.companyName, value: el.id
-            });
-          });*!/
-        }
-            , (error) => {
-              console.log(error);
-            }
-        ));*/
-        this.showSpinner = true;
+            this.showSpinner = true;
         this.subscription.add(forkJoin([this.adminManagedService.getCompanies(), this.adminManagedService.getQuestions(), this.adminManagedService.getMasterAssignment()]).subscribe(
             response => {
                 this.companies = response[0];
                 this.pmvQuestions = response[1];
-                this.masterAssignments = response[2].filter(item => item.status = 'F');
-                this.masterAssignment = this.masterAssignments.reduce((prev, curr) => prev.id < curr.id ? prev : curr);
-                this.selectionForm.controls["selectedYear"].setValue(this.masterAssignment.fiscalYear);
+                ///find any InProgress in masterAssignments
+              if(response[2].filter((item => item.statusTypeId == 2)).length == 0){
+                  this.masterAssignments = response[2].filter(item => item.statusTypeId == 1);
+                  this.masterAssignment = this.masterAssignments.reduce((prev, curr) => prev.id < curr.id ? prev : curr);
+              }
+               else{
+                  this.masterAssignments = response[2].filter(item => item.statusTypeId == 2);
+                  this.masterAssignment = this.masterAssignments[0];
+              }
+                this.masterAssignmentDataSource = new MatTableDataSource<MasterAssignment>(this.masterAssignments);
+                this.masterAssignmentDataSource.paginator = this.masterAssignmentPaginator;
+                this.masterAssignmentDataSource.sort = this.masterAssignmentSort;
+                 this.selectionForm.controls["selectedYear"].setValue(this.masterAssignment.fiscalYear);
                 this.selectionForm.controls["selectedQuarter"].setValue(this.masterAssignment.quarter);
+
                 this.showSpinner = false;
             }, error => {
                 console.log("Error retrieving the data", error);
                 this.showSpinner = false;
             }
         ));
-        /* this.getCompanies();
-        this.getMasterAssignment();
-        this.getQuestions(); */
 
         this.selectionForm = this.fb.group({
             selectedYear: ["", [Validators.required]],
             selectedQuarter: ["", [Validators.required]],
             selectedCompanies: ["", [Validators.required]],
         });
+        this.getMasterCompanyAssignment();
+        this.getPmvFinancialAssignment();
+
+    }
+
+    public createMasterCompanyAssignment(masterCompanyAssignment: MasterCompanyAssignment) {
+        this.adminManagedService.createMasterCompanyAssignment(masterCompanyAssignment).subscribe(
+            updateUserResponse => {
+                // this.getUsers()
+                //this.notificationsService.notify('info', '', updateUserResponse.message);
+            },
+            (errorResponse: Response) => {
+                console.log(errorResponse);
+                //this.notificationsService.notify('error', '', errorResponse.error.toString());
+
+            });
+
+
+    }
+
+    public createPmvFinancialAssignment(pmvFinancialAssignment: PmvFinancialAssignment) {
+        this.adminManagedService.createPmvFinancialAssignment(pmvFinancialAssignment).subscribe(
+            updateUserResponse => {
+                // this.getUsers()
+                //this.notificationsService.notify('info', '', updateUserResponse.message);
+            },
+            (errorResponse: Response) => {
+                console.log(errorResponse);
+                //this.notificationsService.notify('error', '', errorResponse.error.toString());
+
+            });
+
+
+    }
+
+    public updateMasterAssignmentStatus(masterAssignment: MasterAssignment) {
+        this.adminManagedService.updateMasterAssignmentStatus(masterAssignment).subscribe(
+            updateUserResponse => {
+                // this.getUsers()
+                //this.notificationsService.notify('info', '', updateUserResponse.message);
+            },
+            (errorResponse: Response) => {
+                console.log(errorResponse);
+                //this.notificationsService.notify('error', '', errorResponse.error.toString());
+
+            });
+
 
     }
 
     private save = (): void => {
-        /* this.companies = this.selectionForm.controls["selectedCompanies"].value;
-        let tempRoles: Company[];
-        let tempmasterCompanyAssignment: MasterCompanyAssignment[] = [];
-        let tempPmvFinancialAssignment: PmvFinancialAssignment[] = [];
-        tempRoles = this.companies;
-        let tempQuestions = this.pmvQuestions;
-        tempRoles.forEach(el => {
-            //let bodyselectedYear = JSON.stringify( el);
-            //let body = JSON.stringify( this.masterAssignment);
-            //console.log("selectCompanies........."+bodyselectedYear);
-            //console.log("masterAssignment........."+body);
-            tempmasterCompanyAssignment.push({
-                id: Math.round(Math.floor(Math.random() * (1000 - 100 + 1)) + 100), masterAssignmentId: this.masterAssignment.id, companyId: el.id, status: 'F'
-            });
-        }); 
-        let tempmaster = JSON.stringify(tempMasterCompanyAssignment);
-        console.log("masterCompanyAssignment........." + tempmaster);
-        ////////////////////prepare Questions and ANS////////////////////////////////////////
-        tempmasterCompanyAssignment.forEach(cs => {
-            tempQuestions.forEach(qa => {
-                tempPmvFinancialAssignment.push({
-                    id: this.generateId(), companyAssignmentId: cs.id, pmvQuestionId: qa.id, answerStatusTypeId: 1, answer: null, status: 'F'
-                });
-            });
-        });
-        let disfinancialAssignment = JSON.stringify(tempPmvFinancialAssignment);
-        console.log("PmvFinancialAssignment........." + disfinancialAssignment);*/
         let selectedCompanies = this.selectionForm.controls["selectedCompanies"].value;
         let masterCompanyAssignment = selectedCompanies.map((company) => {
             return {
                 id: this.generateId(),
                 masterAssignmentId: this.masterAssignment.id,
                 companyId: company.id,
-                status: 'F'
+                statusTypeId: 2
             }
         });
-        console.log("masterCompanyAssignment........." + JSON.stringify(masterCompanyAssignment));
+       // console.log("masterCompanyAssignment........." + JSON.stringify(masterCompanyAssignment));
         let pmvFinancialAssignment = masterCompanyAssignment.map(cs => {
             return this.pmvQuestions.map(qa => {
                 return {
@@ -174,12 +241,19 @@ export class CreateFinancialAssignmentComponent implements OnInit, OnDestroy {
                     companyAssignmentId: cs.id,
                     pmvQuestionId: qa.id,
                     answerStatusTypeId: 1,
-                    answer: null,
-                    status: 'F'
+                    answer: null
                 }
             })
         })
-        console.log("PmvFinancialAssignment........." + JSON.stringify(pmvFinancialAssignment));
+
+       // console.log("PmvFinancialAssignment........." + JSON.stringify(pmvFinancialAssignment));
+
+        ////updateMasterAssignmentStatus------------------------------------
+ this.masterAssignment.statusTypeId = 2;
+
+        this.createMasterCompanyAssignment(masterCompanyAssignment);
+        this.createPmvFinancialAssignment(pmvFinancialAssignment);
+        this.updateMasterAssignmentStatus( this.masterAssignment);
     }
 
     private generateId = (): number => {
