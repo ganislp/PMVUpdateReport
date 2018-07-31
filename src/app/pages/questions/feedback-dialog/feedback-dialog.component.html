@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Add a reason for the Decline</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" class="user-form">
+        <div fxLayout="column" class="form-field-outer">
+            <mat-form-field class="w-100">
+                <mat-placeholder>Enter the reason</mat-placeholder>
+                <input matInput formControlName="feedback">
+                <mat-error *ngIf="form.controls['feedback'].errors?.required">Comment is required</mat-error>
+                <mat-error *ngIf="form.controls['feedback'].hasError('minlength')">Comment isn't long enough, minimum of 6 characters</mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="save()">
+        <span>Save</span>
+    </button>
+    <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+</div>

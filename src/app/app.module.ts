@@ -38,6 +38,7 @@ import { UserMenuComponent } from './theme/components/user-menu/user-menu.compon
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionsComponent } from './pages/questions/questions.component';
+import { FeedbackDialogComponent } from './pages/questions/feedback-dialog/feedback-dialog.component';
 import { ApiService } from './theme/services';
 import { AdminManagedService } from "./theme/services/admin-managedata.service";
 import { HttpHelperService } from "./theme/services/http-helper.service";
@@ -78,6 +79,7 @@ import { MaterialFileUploadComponent } from './theme/components/file-input/mater
     UserMenuComponent,
     QuestionsComponent,
     MaterialFileUploadComponent,
+    FeedbackDialogComponent
   ],
   providers: [
     AppSettings,
@@ -85,6 +87,7 @@ import { MaterialFileUploadComponent } from './theme/components/file-input/mater
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
     ApiService, AdminManagedService, HttpHelperService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[FeedbackDialogComponent]
 })
 export class AppModule { }

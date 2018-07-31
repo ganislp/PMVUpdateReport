@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
-import { Subscription } from "rxjs/subscription";
+import { Subscription } from "rxjs/Subscription";
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
 import { AdminManagedService } from "../../../theme/services/admin-managedata.service";
@@ -89,11 +89,11 @@ export class CreateFinancialAssignmentComponent implements OnInit, OnDestroy {
     }
 
     getTypeDescription = (id: number): string =>{
-        return this.masterCompanyAssignments.find( item => item.companyId == id) ? this.companies.find( item => item.id == id).companyName : '';
+        return this.masterCompanyAssignments && this.masterCompanyAssignments.find( item => item.companyId == id) ? this.companies.find( item => item.id == id).companyName : '';
     }
 
     getCompanyTypeDescription = (id: number): string =>{
-        return this.masterCompanyAssignments.find( item => item.companyId == id) ? this.companies.find( item => item.id == id).companyType : '';
+        return this.masterCompanyAssignments && this.masterCompanyAssignments.find( item => item.companyId == id) ? this.companies.find( item => item.id == id).companyType : '';
     }
 
     getMasterCompanyAssignmentsProgress():number{

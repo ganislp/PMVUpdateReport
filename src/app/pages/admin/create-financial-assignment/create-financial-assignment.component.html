@@ -9,7 +9,7 @@
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <div class="flex-row-container p-20"  >
+      <div class="flex-row-spaced p-20"  >
         <form [formGroup]="selectionForm" class="user-form">
           <mat-form-field class="select-form w-100">
             <mat-select placeholder="Company Name" name="Company" class="filter-select" formControlName="selectedCompanies" [compareWith]="equals"
@@ -42,7 +42,7 @@
         </form>
 
 
-        <div class="wide-table">
+        <div class="wide-table p-20">
           <h3>Financial Assignment In Progress </h3>
           <mat-table #table [dataSource]="masterAssignmentDataSource" #masterAssignmentSort="matSort" matSort>
 

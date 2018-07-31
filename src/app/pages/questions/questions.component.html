@@ -21,25 +21,27 @@
           </mat-form-field>
 
           <mat-form-field class="p-20">
-            <mat-select placeholder="Company Name" formControlName="companyId" (change)="loadAssessment()" [disabled]="!selectionForm.controls['projectId'].value">
-              <mat-option *ngFor="let company of companies" [value]="company.id">
-                {{company.companyName}} ({{company.companyType}})
+            <mat-select placeholder="Company Name" formControlName="companyAssignment" (change)="loadAssignment()" [disabled]="!selectionForm.controls['projectId'].value">
+              <mat-option *ngFor="let assessment of companyAssessments" [value]="assessment">
+                {{getCompanyNameAndType(assessment.companyId)?.name}} ({{getCompanyNameAndType(assessment.companyId)?.type}})
               </mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field class="p-20">
-            <mat-select placeholder="Assessment Year" formControlName="assessmentYear" [disabled]="true">
+            <!-- <mat-select placeholder="Assessment Year" formControlName="assessmentYear" [disabled]="true">
               <mat-option *ngFor="let year of years" [value]="year.id">
                 {{year.year}}
               </mat-option>
-            </mat-select>
+            </mat-select> -->
+            <input matInput formControlName="assessmentYear" placeholder="Assessment Year" readonly>
           </mat-form-field>
           <mat-form-field class="p-20">
-            <mat-select placeholder="Assessment Quarter" formControlName="assessmentQuarter" [disabled]="true">
+            <!-- <mat-select placeholder="Assessment Quarter" formControlName="assessmentQuarter" [disabled]="true">
               <mat-option *ngFor="let q of quarters" [value]="q.id">
                 {{q.quarter}}
               </mat-option>
-            </mat-select>
+            </mat-select> -->
+            <input matInput formControlName="assessmentQuarter" placeholder="Assessment Quarter" readonly>
           </mat-form-field>
         </form>
         <mat-radio-group class="radio-group" layout="row" layout-align="start center" class="flex-row" [(ngModel)]="userRole">
@@ -50,46 +52,44 @@
       </div>
 
 
-      <!-- <mat-tab-group *ngIf="(selectedCompanyId && selectedYearId && selectedQuarterId)"> -->
-      <mat-tab-group *ngIf="(selectedCompanyId && assessmentItems)">
-        <ng-container *ngFor="let subheading of subheadings">
-          <mat-tab  *ngIf="subheading.subHeading == 'Financial'" [label]="subheading.subHeading">
-            <div fxLayout="column" class="form-field-outer p-20">
-              <ng-container *ngFor="let item of subheading.assessmentItems">
-                <div *ngIf="item.questionType == 1" class="flex-row">
-                  <mat-form-field class="w-100 m-b10 question-width">
-                    <textarea matInput [placeholder]="item.question" [(ngModel)]="item.answer"></textarea>
-                  </mat-form-field>
-                  <mat-checkbox class="example-margin p-20" [(ngModel)]="item.excludeInReporting" *ngIf="userRole == 'dataCapturer'">Exclude in Reporting</mat-checkbox>
-                  <mat-radio-group class="p-20" [(ngModel)]="item.status" *ngIf="userRole == 'reviewer'">
-                    <mat-radio-button [value]="'A'">Approve</mat-radio-button>
-                    <mat-radio-button [value]="'R'">Reject</mat-radio-button>
-                  </mat-radio-group>
-                </div>
-                <div *ngIf="item.questionType == 2" class="flex-row">
-                  <div class="w-100 m-b10 question-width">
-                    <label>{{item.question}}</label>
-                    <div class="p-20">
-                      <label>Is image available ?</label>
-                      <mat-radio-group class="radio-group" [(ngModel)]="item.attachementAvailable">
-                        <mat-radio-button class="radio-button" [value]="'Y'">Yes</mat-radio-button>
-                        <mat-radio-button class="radio-button" [value]="'N'">No</mat-radio-button>
-                      </mat-radio-group>
-                    </div>
-                    <material-file-input *ngIf="item.attachementAvailable == 'Y'" class="p-20"></material-file-input>
+      <mat-tab-group *ngIf="(selectedCompanyAssignment && financialAssignment)">
+        <!-- <mat-tab *ngFor="let subheading of subheadings" [label]="subheading.subHeading"> -->
+        <mat-tab [label]="subheadings[6].subHeading">
+          <div fxLayout="column" class="form-field-outer p-20">
+            <ng-container *ngFor="let item of subheadings[6].assignmentItems">
+              <div *ngIf="getQuestionType(item.pmvQuestionId) == 1" class="flex-row">
+                <mat-form-field class="w-100 m-b10 question-width">
+                  <textarea matInput [placeholder]="getQuestionText(item.pmvQuestionId)" [(ngModel)]="item.answer"></textarea>
+                </mat-form-field>
+                <mat-checkbox class="example-margin p-20" [(ngModel)]="item.excludeInReporting">Exclude in Reporting</mat-checkbox>
+                <mat-radio-group class="p-20" [(ngModel)]="item.answerStatusTypeId" (change)="approveReject(item)" *ngIf="userRole == 'reviewer'">
+                  <mat-radio-button [value]="4">Approve</mat-radio-button>
+                  <mat-radio-button [value]="5">Reject</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div *ngIf="getQuestionType(item.pmvQuestionId) == 2" class="flex-row">
+                <div class="w-100 m-b10 question-width">
+                  <label>{{getQuestionText(item.pmvQuestionId)}}</label>
+                  <div class="p-20">
+                    <label>Is image available ?</label>
+                    <mat-radio-group class="radio-group" [(ngModel)]="item.attachementAvailable">
+                      <mat-radio-button class="radio-button" [value]="true">Yes</mat-radio-button>
+                      <mat-radio-button class="radio-button" [value]="false">No</mat-radio-button>
+                    </mat-radio-group>
                   </div>
-                  <mat-checkbox class="p-20" [(ngModel)]="item.excludeInReporting" *ngIf="userRole == 'dataCapturer'">Exclude in Reporting</mat-checkbox>
-                  <mat-radio-group class="radio-group p-20" [(ngModel)]="item.status" *ngIf="userRole == 'reviewer'">
-                    <mat-radio-button class="radio-button" [value]="'A'">Approve</mat-radio-button>
-                    <mat-radio-button class="radio-button" [value]="'R'">Reject</mat-radio-button>
-                  </mat-radio-group>
+                  <material-file-input *ngIf="item.attachementAvailable == true" class="p-20"></material-file-input>
                 </div>
-              </ng-container>
-            </div>
-            <button mat-raised-button color="primary" class="float-r m-r20" *ngIf="userRole == 'dataCapturer'" (click)="save(subheading)">Save</button>
-            <button mat-raised-button color="primary" class="float-r m-r20" (click)="save(subheading)">Submit</button>
-          </mat-tab>
-        </ng-container>
+                <mat-checkbox class="p-20" [(ngModel)]="item.excludeInReporting">Exclude in Reporting</mat-checkbox>
+                <mat-radio-group class="p-20" [(ngModel)]="item.answerStatusTypeId" (change)="approveReject(item)" *ngIf="userRole == 'reviewer'">
+                  <mat-radio-button [value]="4">Approve</mat-radio-button>
+                  <mat-radio-button [value]="5">Reject</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </ng-container>
+          </div>
+          <button mat-raised-button color="primary" class="float-r m-r20" *ngIf="userRole == 'dataCapturer'" (click)="save(subheadings[6])">Save</button>
+          <button mat-raised-button color="primary" class="float-r m-r20" (click)="save(subheadings[6])">Submit</button>
+        </mat-tab>
       </mat-tab-group>
       <!-- <button mat-raised-button color="primary">Submit</button> -->
     </mat-card-content>

@@ -2,7 +2,8 @@
 
 export class MasterCompanyAssignment {
     id: number;
-    masterAssignmentId:number;
-    companyId:number;
-    statusTypeId:number;
+    masterAssignmentId: number;
+    projectId: number;
+    companyId: number;
+    statusTypeId: number;
 }

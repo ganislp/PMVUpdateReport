@@ -1,23 +1,23 @@
-
 import { Injectable } from "@angular/core";
 import { HttpHelperService } from "./http-helper.service";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { PmvHeading } from "../models/pmv-heading.model";
-import { PmvSubHeading } from "../models/pmv-subheading.model";
-import { PmvQuestion } from "../models/pmv-question.model";
-import { Response } from "../models/response.model";
-import { Project } from "../models/project.model";
-import { Company } from "../models/company.model";
-import { CompanyType } from "../models/company-type.model";
-import { Client } from "../models/client.model";
-import { QuestionType } from "../models/question-type.model";
-import { AssessmentItem } from "../models/assessment.model";
-import {MasterAssignment} from "../models/master-assignment.model";
-import {PmvFinancialAssignment} from "../models/pmv-financial-assignment.model";
-import {MasterCompanyAssignment} from "../models/master-company-assignment.model";
 
-
+import {
+    PmvHeading,
+    Company,
+    CompanyType,
+    Client,
+    QuestionType,
+    MasterAssignment,
+    MasterCompanyAssignment,
+    PmvQuestion,
+    Project,
+    AssessmentItem,
+    PmvSubHeading,
+    PmvFinancialAssignment,
+    Response
+} from '../models'
 
 
 @Injectable()
@@ -67,8 +67,6 @@ export class AdminManagedService {
         return this.httpHelper.getDataWithoutAuthentication<QuestionType[]>('getQuestionTypes');
     }
 
-
-
     updatePmvHeading = (request: PmvHeading): Observable<Response> => {
         return this.httpHelper.putDataWithoutAuthentication<Response>('getPmvHeadings/' + request.id, request);
     }
@@ -84,7 +82,6 @@ export class AdminManagedService {
     addPmvSubHeading = (request: PmvSubHeading): Observable<Response> => {
         return this.httpHelper.postDataWithoutAuthentication<Response>('getPmvSubHeadings', request);
     }
-
 
     getProjects = (): Observable<Project[]> => {
         return this.httpHelper.getDataWithoutAuthentication<Project[]>('getProjects');
@@ -118,7 +115,7 @@ export class AdminManagedService {
         return this.httpHelper.getDataWithoutAuthentication<PmvFinancialAssignment[]>('getFinancialAssignment');
     }
 
-    createMasterCompanyAssignment= (request: MasterCompanyAssignment): Observable<Response> => {
+    createMasterCompanyAssignment = (request: MasterCompanyAssignment): Observable<Response> => {
         return this.httpHelper.postDataWithoutAuthentication<Response>('getMasterCompanyAssignment', request);
     }
 
@@ -128,5 +125,13 @@ export class AdminManagedService {
 
     updateMasterAssignmentStatus = (request: MasterAssignment): Observable<Response> => {
         return this.httpHelper.putDataWithoutAuthentication<Response>('getMasterAssignment/' + request.id, request);
+    }
+
+    getPendingAssessments = (projectId: number): Observable<MasterCompanyAssignment[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<MasterCompanyAssignment[]>('getMasterCompanyAssignment?projectId=' + projectId + '&statusTypeId=2')
+    }
+
+    getFinancialAssignment = (companyAssignmentId: number): Observable<PmvFinancialAssignment[]> => {
+        return this.httpHelper.getDataWithoutAuthentication<PmvFinancialAssignment[]>('getFinancialAssignment?companyAssignmentId=' + companyAssignmentId);
     }
 }
