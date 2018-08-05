@@ -2,11 +2,13 @@
 @include mat-core();
 
 @import 'theme-reset';
+@import 'theme-override';
 .app{
     &.indigo-light{
         @import "skins/indigo-light";
         @include angular-material-theme($indigo-light-theme);
         @include theme-reset($indigo-light-theme);
+        @include theme-override($indigo-light-theme);
     }
     &.teal-light{
         @import "skins/teal-light";
